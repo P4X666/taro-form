@@ -1,0 +1,79 @@
+@error: #ff4949;
+
+.form-component-wrapper {
+  display: flex;
+  width: 100%;
+  padding: 24px 0;
+  background-color: #fff;
+  // 覆盖 taro-ui 的样式
+  .at-input {
+    flex: 1;
+    padding: 0;
+    &::after {
+      border: none;
+    }
+  }
+  .at-switch {
+    padding: 0;
+    .at-switch__title {
+      display: none;
+    }
+    .at-switch__container{
+      flex-direction: row;
+    }
+  }
+  .at-rate {
+    margin-top: 6px;
+    padding-left: 24px;
+  }
+
+  .at-list {
+    flex: 1;
+    &::after {
+      border: none;
+    }
+    .at-list__item {
+      padding: 0 36px 0 0;
+      &::after {
+        border: none;
+      }
+      .at-list__item-extra {
+        min-height: 52px;
+      }
+      .item-extra__icon-arrow {
+        color: #346fc2;
+        font-size: 32px;
+      }
+    }
+  }
+  .at-image-picker {
+    flex: 1;
+    width: auto;
+  }
+  .form-component-content {
+    flex: 1;
+  }
+}
+.form-component-wrapper--border {
+  border-bottom: 1px solid #d6e4ef;
+}
+.formLabel--require {
+  &::before {
+    display: inline-block;
+    margin-right: 8rpx;
+    color: @error;
+    font-size: 28rpx;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+    content: "*";
+  }
+}
+.formLabel--error {
+  display: flex;
+  align-items: center;
+  color: @error;
+}
+
+.form-component-wrapper--new_line{
+  display: block;
+}
