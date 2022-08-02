@@ -26,6 +26,8 @@ export interface FormItemProps{
   onErrorClick: ()=>void
 }
 
+export type FormC<P = {}> = FC<P>;
+
 const FormItem: FC<FormItemProps> = (props) => {
   const {
     name,

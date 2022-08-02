@@ -1,13 +1,26 @@
-import { Picker } from '@tarojs/components';
+import React from 'react';
+import { Picker, PickerMultiSelectorProps, PickerTimeProps, PickerDateProps, PickerRegionProps, PickerSelectorProps, BaseEventOrig } from '@tarojs/components';
 import { useMemo } from 'react';
 import { AtList, AtListItem } from 'taro-ui';
+import { FormC, SomeRequired } from 'src/component/Form/FormItem';
 
-const FormPicker = (props) => {
-  const {mode, range, value, onClick, onChange, hyphens = ' ', ...restProps } = props;
+
+const FormPicker: FormC<PickerMultiSelectorProps | PickerTimeProps | PickerDateProps | PickerRegionProps | PickerSelectorProps> = (props) => {
+  
+  const {
+    mode='',
+    // 范围
+    range,
+    value,
+    onClick,
+    onChange,
+    /** 连字符 */
+    // hyphens = ' ',
+    ...restProps } = props as SomeRequired<PickerMultiSelectorProps | PickerSelectorProps, 'range'> ;
 
   const fullWidth = {flex: 1};
 
-  const _onChange = (e) => {
+  const _onChange = (e: BaseEventOrig) => {
     onChange && onChange(e.detail.value);
   };
   /** hyphens 连接符 默认是空字符串 */
@@ -16,7 +29,7 @@ const FormPicker = (props) => {
       let result = '';
       let i = 0;
       while (i < value.length) {
-        result += hyphens + range[i][value[i]];
+        // result += hyphens + range[i][value[i]];
         i++;
       }
       return result;
@@ -35,7 +48,7 @@ const FormPicker = (props) => {
     return showValue();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ range, value ]);
-  return mode
+  return mode===undefined
     ? <Picker mode={mode} range={range} style={fullWidth} onChange={_onChange} {...restProps}>
       <AtList>
         <AtListItem
@@ -47,10 +60,10 @@ const FormPicker = (props) => {
     : <AtList>
       <AtListItem
         arrow="right"
-        extraText={value}
+        extraText={value as string}
         onClick={onClick}
       />
     </AtList>;
 };
-FormPicker.type = 'FormItem';
+FormPicker.displayName = 'FormItem';
 export default FormPicker;
