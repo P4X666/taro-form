@@ -1,9 +1,11 @@
+// @ts-nocheck
+// AtList 类型“{ children: (string | Element)[]; } ”与类型“IntrinsicAttributes & IntrinsicClassAttributes<Component<AtListProps, any, any>> & Readonly < AtListProps >”不具有相同的属性。
 import React from 'react';
-import { Picker, PickerMultiSelectorProps, PickerTimeProps, PickerDateProps, PickerRegionProps, PickerSelectorProps, BaseEventOrig } from '@tarojs/components';
+import { Picker, PickerTimeProps, PickerDateProps, PickerRegionProps, PickerSelectorProps, BaseEventOrig } from '@tarojs/components';
 import { useMemo } from 'react';
 import { AtList, AtListItem } from 'taro-ui';
 import { FormC, SomeRequired } from 'src/component/Form/FormItem';
-
+import { PickerMultiSelectorProps } from './FormPicker';
 
 const FormPicker: FormC<PickerMultiSelectorProps | PickerTimeProps | PickerDateProps | PickerRegionProps | PickerSelectorProps> = (props) => {
   
@@ -15,8 +17,8 @@ const FormPicker: FormC<PickerMultiSelectorProps | PickerTimeProps | PickerDateP
     onClick,
     onChange,
     /** 连字符 */
-    // hyphens = ' ',
-    ...restProps } = props as SomeRequired<PickerMultiSelectorProps | PickerSelectorProps, 'range'> ;
+    hyphens = ' ',
+    ...restProps } = props as SomeRequired<PickerMultiSelectorProps | PickerSelectorProps, 'range'> & SomeRequired<PickerMultiSelectorProps, 'hyphens'>;
 
   const fullWidth = {flex: 1};
 
@@ -29,7 +31,7 @@ const FormPicker: FormC<PickerMultiSelectorProps | PickerTimeProps | PickerDateP
       let result = '';
       let i = 0;
       while (i < value.length) {
-        // result += hyphens + range[i][value[i]];
+        result += hyphens + range[i][value[i] as string];
         i++;
       }
       return result;
@@ -53,14 +55,14 @@ const FormPicker: FormC<PickerMultiSelectorProps | PickerTimeProps | PickerDateP
       <AtList>
         <AtListItem
           arrow="right"
-          extraText={renderValue}
+          extraText={renderValue?.toString()}
         />
       </AtList>
     </Picker>
     : <AtList>
       <AtListItem
         arrow="right"
-        extraText={value as string}
+        extraText={value?.toString()}
         onClick={onClick}
       />
     </AtList>;

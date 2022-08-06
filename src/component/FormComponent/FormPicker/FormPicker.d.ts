@@ -37,13 +37,19 @@ declare namespace PickerStandardProps {
   }
 }
 
-export interface DefaultPickerProps extends PickerStandardProps {
+/** 
+ * 多列选择器：mode = multiSelector
+ * 覆盖 taro-ui 原有的类型 在原有的基础上加上了 hyphens 连字符
+ *  */
+interface PickerMultiSelectorProps extends PickerStandardProps {
+  /** 选择器类型 */
+  mode: 'multiSelector'
   /**
-   * mode为 selector | multiSelector | undefined 时，range 有效
+   * mode为 selector 或 multiSelector 时，range 有效
    * @supported weapp, h5, rn
    * @default []
    */
-  range: string[] | number[] | Record<string, any>[]
+  range: Array<string[]> | Array<number[]> | Array<Record<string, any>[]>
   /**
    * 当 range 是一个 Object Array 时，通过 rangeKey 来指定 Object 中 key 的值作为选择器显示内容
    * @supported weapp, h5, rn
@@ -52,19 +58,32 @@ export interface DefaultPickerProps extends PickerStandardProps {
   /**
    * 表示选择了 range 中的第几个（下标从 0 开始）
    * @supported weapp, h5, rn
-   * @default 0
+   * @default []
    */
-  value?: number
+  value: number[] | string[] | Record<string, any>[]
   /**
-   * value 改变时触发 change 事件，event.detail = {value}
+   * 当 value 改变时触发 change 事件，event.detail = {value}
    * @supported weapp, h5, rn
    */
-  onChange: CommonEventFunction<PickerSelectorProps.ChangeEventDetail>
+  onChange: CommonEventFunction<PickerMultiSelectorProps.ChangeEventDetail>
+  /**
+   * 列改变时触发
+   * @supported weapp, h5, rn
+   */
+  onColumnChange?: CommonEventFunction<PickerMultiSelectorProps.ColumnChangeEventDetail>,
+  /** 连字符 */
+  hyphens?: string
 }
 
-declare namespace PickerSelectorProps {
+declare namespace PickerMultiSelectorProps {
   interface ChangeEventDetail {
     /** 表示变更值的下标 */
-    value: string | number
+    value: number[]
+  }
+  interface ColumnChangeEventDetail {
+    /** 表示改变了第几列（下标从0开始） */
+    column: number
+    /** 表示变更值的下标 */
+    value: number
   }
 }
