@@ -1,18 +1,20 @@
-import React, { useContext, useEffect, ReactNode, FC } from 'react';
+import React, { useContext, useEffect, FC, MouseEvent } from 'react';
 import FormComponentWrapper from './FormComponentWrapper';
 import { CustomRule } from './useFormStore';
 import { getFormItemFirstChildren, overlaidOriginalAttr, _onErrorClick } from './utils';
 import { FormContext } from './Form';
+
 export type SomeRequired<T, K extends keyof T> = Required<Pick<T, K>> & Omit<T, K>
 export interface FormItemProps{
   name: string,
   // 标签文本
   label?: string,
-  children?: ReactNode,
+  children: JSX.Element,
+  // { value: any, onChange: () => { } }
   /**子节点的值的属性，如 checkbox 的是 'checked' */
-  valuePropName?: string,
+  // valuePropName?: string,
   /**设置收集字段值变更的时机 */
-  trigger?: string;
+  // trigger?: string;
   /**设置如何将 event 的值转换成字段值 */
   getValueFromEvent?: (event: any) => any;
   /**校验规则，设置字段的校验逻辑。请看 async validator 了解更多规则 */
@@ -20,10 +22,10 @@ export interface FormItemProps{
   /**设置字段校验的时机 */
   validateTrigger?: string;
   /** 子组件是否为上下结构 */
-  isNewLine:boolean,
-  className: string,
-  border: boolean,
-  onErrorClick: ()=>void
+  isNewLine?:boolean,
+  className?: string,
+  border?: boolean,
+  onErrorClick?: ()=>void
 }
 
 export type FormC<P = {}> = FC<P>;
@@ -33,28 +35,27 @@ const FormItem: FC<FormItemProps> = (props) => {
     name,
     label,
     children,
-    valuePropName,
-    trigger,
+    // trigger,
     getValueFromEvent,
     rules,
     validateTrigger,
-    isNewLine,
+    isNewLine = false,
     className = '',
-    border,
+    border = true,
     onErrorClick = _onErrorClick,
-  } = props as SomeRequired<FormItemProps, 'getValueFromEvent' | 'trigger' | 'valuePropName' | 'validateTrigger'>;
+  } = props as SomeRequired<FormItemProps, 'getValueFromEvent' | 'validateTrigger'>;
   const { dispatch, fields, initialValues, validateField } = useContext(FormContext);
 
   useEffect(() => {
     // 初始化 item 内容
-    const value = (initialValues && initialValues[name]) || '';
-    dispatch({ type: 'addField', name, value: { label, name, value, rules: rules || [], errors: [], isValid: true }});
+    const itemValue = (initialValues && initialValues[name]) || '';
+    dispatch({ type: 'addField', name, value: { label, name, value: itemValue, rules: rules || [], errors: [], isValid: true }});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 获取store 对应的 value
   const fieldState = fields[name];
-  const value = fieldState && fieldState.value;
+  const fieldValue = fieldState && fieldState.value;
   // 获取store 对应的 errors
   const errors = fieldState && fieldState.errors;
   const hasError = errors && errors.length > 0;
@@ -69,9 +70,12 @@ const FormItem: FC<FormItemProps> = (props) => {
     validateField(name);
   };
   // 1 手动的创建一个属性列表，需要有 value 以及 onChange 属性
-  const controlProps = {};
-  controlProps[valuePropName] = value;
-  controlProps[trigger] = onValueUpdate;
+  const controlProps = {
+    value: fieldValue,
+    onChange: onValueUpdate
+  };
+  // controlProps.value = fieldValue;
+  // controlProps[trigger] = onValueUpdate;
   if (rules) {
     controlProps[validateTrigger] = onValueValidate;
   }
@@ -83,7 +87,7 @@ const FormItem: FC<FormItemProps> = (props) => {
   // 3 cloneElement，混合这个child 以及 手动的属性列表
   // 在混合时需要将 label, required, error, onErrorClick, border 属性拦截
   const nodeProps = { ...child.props, ...controlProps };
-  const returnChildNode = React.cloneElement(child, nodeProps);
+  const returnChildNode = React.cloneElement(child, nodeProps as { value: any, onChange: (e: MouseEvent)=>void  });
 
   const formItemWrapperProps = {
     label,
@@ -100,8 +104,8 @@ const FormItem: FC<FormItemProps> = (props) => {
 };
 
 FormItem.defaultProps = {
-  valuePropName: 'value',
-  trigger: 'onChange',
+  // valuePropName: 'value',
+  // trigger: 'onChange',
   validateTrigger: 'onBlur',
   getValueFromEvent: e => e,
   isNewLine: false

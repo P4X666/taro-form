@@ -6,7 +6,7 @@ export const FormContext = createContext<IFormContext>({} as IFormContext)
 export type RenderProps = (form: FormState) => ReactNode
 export interface FormProps {
   initialValues?: Record<string, any>,
-  children?: ReactNode | RenderProps
+  children: JSX.Element[] | RenderProps
 }
 export type IFormContext =
   Pick<ReturnType<typeof useFormStore>, 'dispatch' | 'fields' | 'validateField'>
