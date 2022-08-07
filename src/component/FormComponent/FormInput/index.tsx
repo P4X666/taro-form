@@ -4,7 +4,8 @@ import { FormC } from 'src/component/Form/FormItem';
 import { FormInputProps } from './FormInput';
 
 const FormInput: FormC<FormInputProps> = (props) => {
-  return <AtInput {...props} />;
+  const { name='', onChange=()=>{}, ...restProps } = props;
+  return <AtInput name={name} onChange={onChange} {...restProps} />;
 };
 FormInput.displayName = 'FormItem';
 export default FormInput;
