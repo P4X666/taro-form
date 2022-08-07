@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import Form from './form'
-import Item, { FormItemProps } from './formItem'
+import Form from './Form'
+import Item, { FormItemProps } from './FormItem'
 
 export type IFormComponent = typeof Form & {
   Item: FC<FormItemProps>

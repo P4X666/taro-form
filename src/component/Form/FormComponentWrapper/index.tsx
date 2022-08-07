@@ -35,9 +35,9 @@ const FormComponentWrapper: FC<FormComponentWrapperProps> = (props) => {
   return <View className={wrapperClass}>
     { label && <View className={labelClass} onClick={onErrorClick}>
       { label }
-      { error && <View className="at-icon at-icon-alert-circle"></View> }
+      { error && <View className='at-icon at-icon-alert-circle'></View> }
     </View>}
-    <View className="form-component-content">
+    <View className='form-component-content'>
       {props.children}
     </View>
   </View>;
