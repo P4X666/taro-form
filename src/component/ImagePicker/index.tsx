@@ -46,7 +46,7 @@ const generateMatrix = (
 
 const ENV = Taro.getEnv();
 
-interface ImagePickerProps extends Omit<AtImagePickerProps, "files"> {
+export interface ImagePickerProps extends Omit<AtImagePickerProps, "files"> {
   value: File[];
   children?: ReactNode;
 }

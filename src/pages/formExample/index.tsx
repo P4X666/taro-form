@@ -74,14 +74,14 @@ const FormExample = () => {
             name='dateSelect'
             rules={[{ type: 'string', required: true, message: '请选择日期' }]}
           >
-            <FormPicker mode='date' range={multiSelector}></FormPicker>
+            <FormPicker mode='date'></FormPicker>
           </Form.Item>
           <Form.Item
             label='选择时间'
             name='timeSelect'
             rules={[{ type: 'string', required: true, message: '请选择日期' }]}
           >
-            <FormPicker mode='time' range={multiSelector}></FormPicker>
+            <FormPicker mode='time'></FormPicker>
           </Form.Item>
           <Form.Item
             label='评分组件'
@@ -102,6 +102,7 @@ const FormExample = () => {
             label='图片选择组件'
             name='imagePicker'
             rules={[{ type: 'number', required: true, message: '请选择评分' }]}
+            isNewLine
           >
             <FormImagePicker />
               {/* <Button type="primary">上传</Button> */}

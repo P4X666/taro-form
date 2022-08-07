@@ -1,10 +1,31 @@
 {
   "name": "taro-form",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "description": "仿照 ant design 的form设计的taro表单",
+  "author": "pengshixing",
+  "license": "MIT",
+  "keywords": [
+    "taro3",
+    "form",
+    "react",
+    "ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/P4X666/taro-form"
+  },
+  "main": "index.ts",
+  "types": "index.d.ts",
+  "files": [
+    "index.ts",
+    "index.d.ts",
+    "src/component/Form",
+    "src/component/FormComponent",
+    "src/component/ImagePicker"
+  ],
   "templateInfo": {
-    "name": "default",
+    "name": "taro form",
     "typescript": true,
     "css": "less"
   },
@@ -39,9 +60,20 @@
     "Android >= 4.1",
     "ios >= 8"
   ],
-  "author": "",
-  "dependencies": {
+  "peerDependencies": {
     "@babel/runtime": "^7.7.7",
+    "@tarojs/react": "^3.0.0",
+    "@tarojs/runtime": "^3.0.0",
+    "@tarojs/taro": "^3.0.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "taro-ui": "^3.1.0-beta.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "@babel/runtime": "^7.7.7",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.5",
+    "@tarojs/cli": "3.5.1",
     "@tarojs/components": "3.5.1",
     "@tarojs/helper": "3.5.1",
     "@tarojs/plugin-framework-react": "3.5.1",
@@ -51,36 +83,32 @@
     "@tarojs/plugin-platform-swan": "3.5.1",
     "@tarojs/plugin-platform-tt": "3.5.1",
     "@tarojs/plugin-platform-weapp": "3.5.1",
-    "@tarojs/react": "3.5.1",
+    "@tarojs/react": "^3.0.0",
     "@tarojs/router": "3.5.1",
-    "@tarojs/runtime": "3.5.1",
+    "@tarojs/runtime": "^3.0.0",
     "@tarojs/shared": "3.5.1",
-    "@tarojs/taro": "3.5.1",
+    "@tarojs/taro": "^3.0.0",
     "@tarojs/taro-h5": "3.5.1",
-    "async-validator": "^4.2.5",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "taro-ui": "^3.1.0-beta.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.8.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "0.5.5",
-    "@tarojs/cli": "3.5.1",
     "@tarojs/webpack5-runner": "3.5.1",
     "@types/react": "^18.0.0",
     "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
+    "async-validator": "^4.2.5",
     "babel-preset-taro": "3.5.1",
     "eslint": "^8.12.0",
     "eslint-config-taro": "3.5.1",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
     "react-refresh": "0.11.0",
     "husky": "^8.0.1",
     "stylelint": "^14.4.0",
+    "rollup": "^2.77.2",
     "typescript": "^4.1.0",
-    "webpack": "5.69.0"
+    "webpack": "5.69.0",
+    "taro-ui": "^3.1.0-beta.2"
   }
 }

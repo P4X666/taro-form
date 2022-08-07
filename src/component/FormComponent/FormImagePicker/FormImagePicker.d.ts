@@ -1,5 +1,5 @@
 
-import { ComponentClass, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { AtImagePickerProps, File } from 'taro-ui/types/image-picker';
 
 export interface FormImagePickerProps extends Omit<AtImagePickerProps, 'files' | 'value' | 'onChange'> {
@@ -10,7 +10,3 @@ export interface FormImagePickerProps extends Omit<AtImagePickerProps, 'files' |
   onChange?: (files: File[], operationType: 'add' | 'remove', index?: number) => void,
   children?: ReactNode
 }
-
-declare const FormImagePicker: ComponentClass<FormImagePickerProps>
-
-export default FormImagePicker
