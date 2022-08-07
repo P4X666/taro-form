@@ -8,6 +8,11 @@
     "typescript": true,
     "css": "less"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "scripts": {
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
@@ -26,7 +31,8 @@
     "dev:rn": "npm run build:rn -- --watch",
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
-    "dev:quickapp": "npm run build:quickapp -- --watch"
+    "dev:quickapp": "npm run build:quickapp -- --watch",
+    "lint": "eslint --ext ts,tsx src --max-warnings 5"
   },
   "browserslist": [
     "last 3 versions",
@@ -72,6 +78,7 @@
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "react-refresh": "0.11.0",
+    "husky": "^8.0.1",
     "stylelint": "^14.4.0",
     "typescript": "^4.1.0",
     "webpack": "5.69.0"
