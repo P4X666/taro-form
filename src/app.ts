@@ -1,7 +1,8 @@
-import { Component } from 'react'
+import { Component, ReactNode } from 'react'
+import 'taro-ui/dist/style/index.scss';
 import './app.less'
 
-class App extends Component {
+class App extends Component<{ children:ReactNode }> {
 
   componentDidMount () {}
 
