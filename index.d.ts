@@ -9,17 +9,32 @@ import { FormPickerSimpleProps,
   FormPickerDateProps,
   FormPickerRegionProps,
   FormPickerSelectorProps } from './src/component/FormComponent/FormPicker/FormPicker';
+import { FormRateProps } from "./src/component/FormComponent/FormRate/FormRate";
+import { FormSwitchProps } from "./src/component/FormComponent/FormSwitch/FormSwitch";
+import Form from "./src/component/Form/index"
 
 declare const ImagePicker: FormC<ImagePickerProps>;
 declare const FormCheckbox: FormC<FormCheckboxProps<any>>
 declare const FormImagePicker: FormC<FormImagePickerProps>
 declare const FormInput: FormC<FormInputProps>
-declare const FormPicker: FormC<FormPickerSimpleProps | FormPickerMultiSelectorProps | FormPickerTimeProps | FormPickerDateProps | FormPickerRegionProps | FormPickerSelectorProps>
+declare const FormPicker: FormC<
+  | FormPickerMultiSelectorProps
+  | FormPickerTimeProps
+  | FormPickerDateProps
+  | FormPickerRegionProps
+  | FormPickerSelectorProps
+  | FormPickerSimpleProps
+>;
+declare const FormRate: FormC<FormRateProps>;
+declare const FormSwitch: FormC<FormSwitchProps>;
 
 export {
   ImagePicker,
   FormCheckbox,
   FormImagePicker,
   FormInput,
-  FormPicker
+  FormPicker,
+  FormRate,
+  FormSwitch,
+  Form
 };

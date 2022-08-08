@@ -2,7 +2,7 @@ import { CommonEventFunction, PickerMultiSelectorProps, PickerTimeProps, PickerD
 
 /** 选择器通用参数 */
 export interface FormPickerSimpleProps {
-  value: string | undefined,
+  value?: string | undefined,
   onClick: CommonEventFunction<any>
 }
 

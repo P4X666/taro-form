@@ -11,16 +11,16 @@ import {
   FormPickerTimeProps,
   FormPickerDateProps,
   FormPickerRegionProps,
-  FormPickerSelectorProps,
+  FormPickerSelectorProps
 } from "./FormPicker";
 
 const FormPicker: FormC<
-  | FormPickerSimpleProps
   | FormPickerMultiSelectorProps
   | FormPickerTimeProps
   | FormPickerDateProps
   | FormPickerRegionProps
   | FormPickerSelectorProps
+  | FormPickerSimpleProps
 > = props => {
   const {
     mode = undefined,
@@ -32,8 +32,7 @@ const FormPicker: FormC<
     /** 连字符 */
     hyphens = " ",
     ...restProps
-  } = props as 
-    SomeRequired<FormPickerMultiSelectorProps, "hyphens">;
+  } = props as SomeRequired<FormPickerMultiSelectorProps, "hyphens">;
 
   const fullWidth = { flex: 1 };
 
@@ -65,7 +64,7 @@ const FormPicker: FormC<
     return showValue();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [range, value]);
-  return mode === undefined ? (
+  return mode !== undefined ? (
     <Picker
       mode={mode}
       range={range}

@@ -1516,6 +1516,14 @@
     "@babel/runtime" "^7.14.5"
     "@tarojs/runtime" "3.5.1"
 
+"@tarojs/api@3.5.2":
+  version "3.5.2"
+  resolved "https://registry.npmmirror.com/@tarojs/api/-/api-3.5.2.tgz#47ec5f75490cb2f00ee77a8375fa95551f81a865"
+  integrity sha512-R4ssrW8yqANtNztclqfQY8oZaHv7EBEhhTPoCBVzqRdzCCXYlW+xB/O2qR0Jy7YJxECTTJh9XC2vf+Hgfm889Q==
+  dependencies:
+    "@babel/runtime" "^7.14.5"
+    "@tarojs/runtime" "3.5.2"
+
 "@tarojs/cli@3.5.1":
   version "3.5.1"
   resolved "https://registry.npmmirror.com/@tarojs/cli/-/cli-3.5.1.tgz#4c83cb9b62f715d09cf5f754d17a969abbe31c1b"
@@ -1671,13 +1679,13 @@
     "@tarojs/service" "3.5.1"
     "@tarojs/shared" "3.5.1"
 
-"@tarojs/react@3.5.1":
-  version "3.5.1"
-  resolved "https://registry.npmmirror.com/@tarojs/react/-/react-3.5.1.tgz#7887e49da9a73f21cd4764b7a5d64d424dfeca8c"
-  integrity sha512-2AG+vEK+GEKio28yIb/s3fPwp0ETg5P1PpJsDS0ydeCYUMnA6z0Bwq3o6ziz5tt9L/cvp/2ahb+a0X9UyEp/4Q==
+"@tarojs/react@^3.0.0":
+  version "3.5.2"
+  resolved "https://registry.npmmirror.com/@tarojs/react/-/react-3.5.2.tgz#23f036126f225fb4439d62437a248f155643ee51"
+  integrity sha512-o9cVYxC0XEhkO2cpNC6BEj9fVo2nYbIQUoeslzIVDH1u4fELozVtDsBg1E11bvdyo/TGK9AYQdi97S1BG6Bxsw==
   dependencies:
-    "@tarojs/runtime" "3.5.1"
-    "@tarojs/shared" "3.5.1"
+    "@tarojs/runtime" "3.5.2"
+    "@tarojs/shared" "3.5.2"
     react-reconciler "0.27.0"
     scheduler "^0.20.1"
 
@@ -1710,6 +1718,14 @@
     "@tarojs/shared" "3.5.1"
     lodash-es "4.17.21"
 
+"@tarojs/runtime@3.5.2", "@tarojs/runtime@^3.0.0":
+  version "3.5.2"
+  resolved "https://registry.npmmirror.com/@tarojs/runtime/-/runtime-3.5.2.tgz#9748e0a867561072276332f3864f2d485a5e8dbc"
+  integrity sha512-lV5m/mxd9HfEO5OKlNzpFyUE3Liusdfrd3d4T8u4hCqoIW81KwqRc41lqp6XNvbQpUqZ6BW+6h0oZJWpG3z7JQ==
+  dependencies:
+    "@tarojs/shared" "3.5.2"
+    lodash-es "4.17.21"
+
 "@tarojs/service@3.5.1":
   version "3.5.1"
   resolved "https://registry.npmmirror.com/@tarojs/service/-/service-3.5.1.tgz#3f012b47127e8af35f0b93c08ee5f887b2cdf704"
@@ -1729,6 +1745,11 @@
   version "3.5.1"
   resolved "https://registry.npmmirror.com/@tarojs/shared/-/shared-3.5.1.tgz#63721572ed5ae5445d012bcc81f4fde0e6abf504"
   integrity sha512-fx93OSayS2tmlQ5n6WGenblO4zxzLmX7t9j7nFatYKYPvaRMt3j+OkN/GO2Ol3Pp+Roe+0gKTRQ9PDxJHoK+zA==
+
+"@tarojs/shared@3.5.2":
+  version "3.5.2"
+  resolved "https://registry.npmmirror.com/@tarojs/shared/-/shared-3.5.2.tgz#0b30ba659cea5c4c9689c16fdf4ae763ba94e56b"
+  integrity sha512-D19SZgvwtFB7DxaBQsf3lP+pAtYNMZrJs448SwpcuFIBT4zh2PNc5oE6WjYuk4DgoEpgp1vj6OMJ2Sqtf+RqDQ==
 
 "@tarojs/taro-h5@3.5.1":
   version "3.5.1"
@@ -1759,6 +1780,14 @@
   dependencies:
     "@tarojs/api" "3.5.1"
     "@tarojs/runtime" "3.5.1"
+
+"@tarojs/taro@^3.0.0":
+  version "3.5.2"
+  resolved "https://registry.npmmirror.com/@tarojs/taro/-/taro-3.5.2.tgz#11373c7651effb8be0649a0e162456f393279a6d"
+  integrity sha512-bpPTz1dXN8t+PmfHnqc+edBCszgGj76n/1RkVjLoumTSHw93QJjfvym3TgdhySuJpToCrMpvcLscPjIi9nFVsA==
+  dependencies:
+    "@tarojs/api" "3.5.2"
+    "@tarojs/runtime" "3.5.2"
 
 "@tarojs/taroize@3.5.1":
   version "3.5.1"
@@ -6709,6 +6738,11 @@ human-signals@^2.1.0:
   resolved "https://registry.npmmirror.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
+husky@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.npmmirror.com/husky/-/husky-8.0.1.tgz#511cb3e57de3e3190514ae49ed50f6bc3f50b3e9"
+  integrity sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==
+
 iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "https://registry.npmmirror.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -9715,7 +9749,7 @@ rc@1.2.8, rc@^1.0.1, rc@^1.1.6, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^18.0.0:
+react-dom@>=16.8.0:
   version "18.2.0"
   resolved "https://registry.npmmirror.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -9761,7 +9795,7 @@ react-refresh@^0.4.0:
   resolved "https://registry.npmmirror.com/react-refresh/-/react-refresh-0.4.3.tgz#966f1750c191672e76e16c2efa569150cc73ab53"
   integrity sha512-Hwln1VNuGl/6bVwnd0Xdn1e84gT/8T9aYNL+HAKDArLCS7LWjwr7StE30IEYbIkx0Vi3vs+coQxe+SQDbGbbpA==
 
-react@^18.0.0:
+react@>=16.8.0:
   version "18.2.0"
   resolved "https://registry.npmmirror.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -10219,6 +10253,13 @@ rimraf@^3.0.0, rimraf@^3.0.2:
   integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
   dependencies:
     glob "^7.1.3"
+
+rollup@^2.77.2:
+  version "2.77.2"
+  resolved "https://registry.npmmirror.com/rollup/-/rollup-2.77.2.tgz#6b6075c55f9cc2040a5912e6e062151e42e2c4e3"
+  integrity sha512-m/4YzYgLcpMQbxX3NmAqDvwLATZzxt8bIegO78FZLl+lAgKJBd1DRAOeEiZcKOIOPjxE6ewHWHNgGEalFXuz1g==
+  optionalDependencies:
+    fsevents "~2.3.2"
 
 run-async@^0.1.0:
   version "0.1.0"
