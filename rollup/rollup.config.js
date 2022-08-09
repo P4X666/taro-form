@@ -20,8 +20,9 @@ const config = {
     commonjs(),
     // json(),
     typescript({ tsconfigOverride: overrides }),
-    less({ output: 'dist/index.css' })
+    less({ output: 'dist/index.css' }),
   ],
+  external: ['react','react-dom', 'react-is', 'prop-types', 'classnames', '@tarojs/taro', '@tarojs/components', 'taro-ui','lodash', 'object-assign',]
 }
 
 export default config
