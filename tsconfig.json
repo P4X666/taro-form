@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "lib",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    // "sourceMap": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "jsx": "react",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    // "typeRoots": ["node_modules/@types"]
+  },
+  "include": ["./src", "./types"],
+  "compileOnSave": false
+}
