@@ -12,20 +12,21 @@ export type RenderProps = (form: FormState) => ReactNode;
 export interface FormProps {
   initialValues?: Record<string, any>;
   children: JSX.Element[] | RenderProps;
-  onValuesChange?: (changedValues: Record<string, any>) => void;
+  /** 字段更新时触发回调事件 */
+  onFieldsChange?: (changedValues: Record<string, any>) => void;
 }
 export type IFormContext = Pick<
   ReturnType<typeof useFormStore>,
   "dispatch" | "fields" | "validateField"
 > &
   Pick<FormProps, "initialValues"> &
-  Pick<FormProps, "onValuesChange">;
+  Pick<FormProps, "onFieldsChange">;
 export type IFormRef = Omit<
   ReturnType<typeof useFormStore>,
   "fields" | "dispatch" | "form"
 >;
 const Form = forwardRef<IFormRef, FormProps>((props, ref) => {
-  const { children, initialValues, onValuesChange } = props;
+  const { children, initialValues, onFieldsChange } = props;
   const { form, fields, dispatch, ...restProps } = useFormStore(initialValues);
   const { validateField } = restProps;
   /** 绑定在 form 实例上的方法，外部可直接使用 */
@@ -39,7 +40,7 @@ const Form = forwardRef<IFormRef, FormProps>((props, ref) => {
     fields,
     initialValues,
     validateField,
-    onValuesChange
+    onFieldsChange
   };
 
   // 支持自定义渲染

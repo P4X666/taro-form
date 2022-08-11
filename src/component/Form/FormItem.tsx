@@ -64,7 +64,7 @@ const FormItem: FC<FormItemProps> = props => {
     fields,
     initialValues,
     validateField,
-    onValuesChange = emptyFunction
+    onFieldsChange = emptyFunction
   } = useContext(FormContext);
 
   useEffect(() => {
@@ -99,7 +99,7 @@ const FormItem: FC<FormItemProps> = props => {
   const onValueUpdate = (e: any) => {
     const val = getValueFromEvent(e);
     // 通知外部更新
-    onValuesChange({[name]:val});
+    onFieldsChange({ [name]: val });
     dispatch({ type: "updateValue", name, value: val });
   };
   const onValueValidate = () => {
