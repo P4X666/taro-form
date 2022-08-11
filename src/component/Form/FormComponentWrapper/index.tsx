@@ -32,15 +32,20 @@ const FormComponentWrapper: FC<FormComponentWrapperProps> = (props) => {
     'formLabel--error': error,
     'formLabel--require': required
   });
-  return <View className={wrapperClass}>
-    { label && <View className={labelClass} onClick={onErrorClick}>
-      { label }
-      { error && <View className='at-icon at-icon-alert-circle'></View> }
-    </View>}
-    <View className='form-component-content'>
-      {props.children}
+  const contentClass = classNames("form-component-content", {
+    "form-component-content-space": isNewLine
+  });
+  return (
+    <View className={wrapperClass}>
+      {label && (
+        <View className={labelClass} onClick={onErrorClick}>
+          {label}
+          {error && <View className="at-icon at-icon-alert-circle"></View>}
+        </View>
+      )}
+      <View className={contentClass}>{props.children}</View>
     </View>
-  </View>;
+  );
 };
 
 FormComponentWrapper.defaultProps = {
