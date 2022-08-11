@@ -59,9 +59,13 @@ const FormItem: FC<FormItemProps> = props => {
     FormItemProps,
     "getValueFromEvent" | "validateTrigger"
   >;
-  const { dispatch, fields, initialValues, validateField } = useContext(
-    FormContext
-  );
+  const {
+    dispatch,
+    fields,
+    initialValues,
+    validateField,
+    onValuesChange = emptyFunction
+  } = useContext(FormContext);
 
   useEffect(() => {
     // 初始化 item 内容
@@ -94,6 +98,8 @@ const FormItem: FC<FormItemProps> = props => {
 
   const onValueUpdate = (e: any) => {
     const val = getValueFromEvent(e);
+    // 通知外部更新
+    onValuesChange({[name]:val});
     dispatch({ type: "updateValue", name, value: val });
   };
   const onValueValidate = () => {
@@ -104,8 +110,6 @@ const FormItem: FC<FormItemProps> = props => {
     value: fieldValue,
     onChange: onValueUpdate
   };
-  // controlProps.value = fieldValue;
-  // controlProps[trigger] = onValueUpdate;
   if (rules) {
     controlProps[validateTrigger] = onValueValidate;
   }

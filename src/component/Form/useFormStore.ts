@@ -108,7 +108,6 @@ function useFormStore(initialValues?: Record<string, any>) {
         errors = e.errors;
       })
       .finally(() => {
-        console.log('errors', isValid);
         dispatch({
           type: 'updateValidateResult',
           name,
