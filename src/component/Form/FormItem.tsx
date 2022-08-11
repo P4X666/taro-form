@@ -89,12 +89,16 @@ const FormItem: FC<FormItemProps> = (props) => {
   const nodeProps = { ...child.props, ...controlProps };
   const returnChildNode = React.cloneElement(child, nodeProps as { value: any, onChange: (e: MouseEvent)=>void  });
 
+  const onErrorClickHandle = useCallback(
+    () => onErrorClick(errors[0].message || ""),
+    [errors?.[0]?.message]
+  );
   const formItemWrapperProps = {
     label,
     required: isRequired,
     error: hasError,
     isNewLine,
-    onErrorClick: () => onErrorClick(errors[0].message || ''),
+    onErrorClick: onErrorClickHandle,
     border,
     className
   };
