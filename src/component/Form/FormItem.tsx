@@ -1,10 +1,21 @@
-import React, { useContext, useEffect, FC, MouseEvent } from 'react';
-import FormComponentWrapper from './FormComponentWrapper';
-import { CustomRule } from './useFormStore';
-import { getFormItemFirstChildren, overlaidOriginalAttr, _onErrorClick } from './utils';
-import { FormContext } from './Form';
+import React, {
+  useContext,
+  useEffect,
+  FC,
+  MouseEvent,
+  useCallback
+} from "react";
+import FormComponentWrapper from "./FormComponentWrapper";
+import { CustomRule } from "./useFormStore";
+import {
+  getFormItemFirstChildren,
+  overlaidOriginalAttr,
+  _onErrorClick
+} from "./utils";
+import { FormContext } from "./Form";
 
-export type SomeRequired<T, K extends keyof T> = Required<Pick<T, K>> & Omit<T, K>
+export type SomeRequired<T, K extends keyof T> = Required<Pick<T, K>> &
+  Omit<T, K>;
 export interface FormItemProps {
   name: string;
   // 标签文本
@@ -31,7 +42,7 @@ export interface FormItemProps {
 export type FormC<P = {}> = FC<P>;
 export const emptyFunction = () => {};
 
-const FormItem: FC<FormItemProps> = (props) => {
+const FormItem: FC<FormItemProps> = props => {
   const {
     name,
     label,
@@ -41,17 +52,33 @@ const FormItem: FC<FormItemProps> = (props) => {
     rules,
     validateTrigger,
     isNewLine = false,
-    className = '',
+    className = "",
     border = true,
-    onErrorClick = _onErrorClick,
-  } = props as SomeRequired<FormItemProps, 'getValueFromEvent' | 'validateTrigger'>;
-  const { dispatch, fields, initialValues, validateField } = useContext(FormContext);
+    onErrorClick = _onErrorClick
+  } = props as SomeRequired<
+    FormItemProps,
+    "getValueFromEvent" | "validateTrigger"
+  >;
+  const { dispatch, fields, initialValues, validateField } = useContext(
+    FormContext
+  );
 
   useEffect(() => {
     // 初始化 item 内容
-    const itemValue = (initialValues && initialValues[name]) || '';
-    dispatch({ type: 'addField', name, value: { label, name, value: itemValue, rules: rules || [], errors: [], isValid: true }});
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    const itemValue = (initialValues && initialValues[name]) || "";
+    dispatch({
+      type: "addField",
+      name,
+      value: {
+        label,
+        name,
+        value: itemValue,
+        rules: rules || [],
+        errors: [],
+        isValid: true
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 获取store 对应的 value
@@ -61,11 +88,13 @@ const FormItem: FC<FormItemProps> = (props) => {
   const errors = fieldState && fieldState.errors;
   const hasError = errors && errors.length > 0;
   // 支持自定义校验
-  const isRequired = rules?.some(rule => (typeof rule !== 'function') && rule.required);
+  const isRequired = rules?.some(
+    rule => typeof rule !== "function" && rule.required
+  );
 
   const onValueUpdate = (e: any) => {
     const val = getValueFromEvent(e);
-    dispatch({ type: 'updateValue', name, value: val });
+    dispatch({ type: "updateValue", name, value: val });
   };
   const onValueValidate = () => {
     validateField(name);
@@ -88,7 +117,10 @@ const FormItem: FC<FormItemProps> = (props) => {
   // 3 cloneElement，混合这个child 以及 手动的属性列表
   // 在混合时需要将 label, required, error, onErrorClick, border 属性拦截
   const nodeProps = { ...child.props, ...controlProps };
-  const returnChildNode = React.cloneElement(child, nodeProps as { value: any, onChange: (e: MouseEvent)=>void  });
+  const returnChildNode = React.cloneElement(
+    child,
+    nodeProps as { value: any; onChange: (e: MouseEvent) => void }
+  );
 
   const onErrorClickHandle = useCallback(
     () => onErrorClick(errors[0].message || ""),
@@ -103,15 +135,17 @@ const FormItem: FC<FormItemProps> = (props) => {
     border,
     className
   };
-  return <FormComponentWrapper {...formItemWrapperProps}>
-    {returnChildNode}
-  </FormComponentWrapper>;
+  return (
+    <FormComponentWrapper {...formItemWrapperProps}>
+      {returnChildNode}
+    </FormComponentWrapper>
+  );
 };
 
 FormItem.defaultProps = {
   // valuePropName: 'value',
   // trigger: 'onChange',
-  validateTrigger: 'onBlur',
+  validateTrigger: "onBlur",
   getValueFromEvent: e => e,
   isNewLine: false
 };
