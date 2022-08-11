@@ -1,6 +1,6 @@
 {
   "name": "fe-taro-form",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "private": false,
   "description": "仿照 ant design 的form设计的taro表单",
   "author": "pengshixing",

@@ -1,13 +1,15 @@
-import { useRef } from 'react';
+import { MutableRefObject, useRef } from 'react';
 import { View, Button } from '@tarojs/components';
 import Form from 'src/component/Form';
-import { AtCheckbox, AtDivider, AtInput } from 'taro-ui';
+import { AtDivider } from 'taro-ui';
+import { FormCheckbox, FormInput } from 'src/component/FormComponent';
 import styles from './index.module.less';
+import React from 'react';
 
 const SimpleFormExample = () => {
 
-  const formRef = useRef(null);
-  const custFormRef = useRef(null);
+  const formRef: MutableRefObject<any> = useRef(null);
+  const custFormRef: MutableRefObject<any> = useRef(null);
 
   const onSubmit = () => {
     formRef.current.validateAllFields().then(({ isValid, errors, values }) => {
@@ -34,7 +36,6 @@ const SimpleFormExample = () => {
   };
 
   const confirmRules = [
-    { type: 'string', required: true, min: 3, max: 8, message: '密码长度必须在3-8个字符之间' },
     ({ getFieldValue }) => ({
       asyncValidator(rule, value) {
         console.log('the value', getFieldValue('password'));
@@ -57,41 +58,39 @@ const SimpleFormExample = () => {
       <View className={styles.box}>
         <Form ref={formRef} initialValues={{ username: '用户名1' }}>
           <Form.Item label="用户名" name="username" rules={[ { type: 'string', required: true, message: '用户名必填' } ]}>
-            <AtInput />
+            <FormInput type="phone" placeholder="请输入用户名" />
           </Form.Item>
           <Form.Item label="密码" name="password" rules={[ { type: 'string', required: true, min: 3, max: 8, message: '密码长度必须在3-8个字符之间' } ]}>
-            <AtInput type="password" />
+            <FormInput type="password" />
           </Form.Item>
           <Form.Item label="重复密码" name="confirmPwd" rules={confirmRules}>
-            <AtInput type="password" />
+            <FormInput type="password" />
           </Form.Item>
         </Form>
         <Button form-type="submit" onClick={onSubmit} className={styles.submit}>登录</Button>
         <AtDivider content="分割线" />
-        <Form name="newLine" ref={custFormRef} initialValues={{ username: '用户名2' }}>
+        <Form ref={custFormRef} initialValues={{ username: '用户名2' }}>
           {
             ({isValid, isSubmitting, errors}) => {
-              console.log(isValid, errors, 'isValid, errors');
               return (
                 <>
                   <View className={styles.formItem}>
                     <Form.Item isNewLine label="用户名" name="username" rules={[ { type: 'string', required: true, message: '用户名必填' } ]}>
-                      <AtInput />
+                      <FormInput />
                     </Form.Item>
                   </View>
                   <View className={styles.formItem}>
                     <Form.Item isNewLine label="密码" name="password" rules={[ { type: 'string', required: true, min: 3, max: 8, message: '密码长度必须在3-8个字符之间' } ]}>
-                      <AtInput type="password" />
+                      <FormInput type="password" />
                     </Form.Item>
                   </View>
                   <View className={styles.formItem}>
                     <Form.Item
                       className={styles.agreementWrap}
                       name="agreement"
-                      valuePropName="selectedList"
                       rules={[ { type: 'array', len: 1, message: '请同意协议' } ]}
                     >
-                      <AtCheckbox options={checkboxOption} />
+                      <FormCheckbox options={checkboxOption} />
                     </Form.Item>
                     <View className={styles.agreementText}>注册即代表你同意<View className={styles.agreement}>用户协议</View></View>
                   </View>
