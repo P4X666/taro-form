@@ -31,7 +31,7 @@ export interface FormItemProps {
   /**校验规则，设置字段的校验逻辑。请看 async validator 了解更多规则 */
   rules?: CustomRule[];
   /**设置字段校验的时机 */
-  validateTrigger?: string;
+  validateTrigger?: "onBlur" | "onChange";
   /** 子组件是否为上下结构 */
   isNewLine?: boolean;
   className?: string;
