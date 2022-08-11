@@ -5,11 +5,11 @@ import { getFormItemFirstChildren, overlaidOriginalAttr, _onErrorClick } from '.
 import { FormContext } from './Form';
 
 export type SomeRequired<T, K extends keyof T> = Required<Pick<T, K>> & Omit<T, K>
-export interface FormItemProps{
-  name: string,
+export interface FormItemProps {
+  name: string;
   // 标签文本
-  label?: string,
-  children: JSX.Element,
+  label?: string;
+  children: JSX.Element;
   // { value: any, onChange: () => { } }
   /**子节点的值的属性，如 checkbox 的是 'checked' */
   // valuePropName?: string,
@@ -22,10 +22,10 @@ export interface FormItemProps{
   /**设置字段校验的时机 */
   validateTrigger?: string;
   /** 子组件是否为上下结构 */
-  isNewLine?:boolean,
-  className?: string,
-  border?: boolean,
-  onErrorClick?: ()=>void
+  isNewLine?: boolean;
+  className?: string;
+  border?: boolean;
+  onErrorClick?: () => void;
 }
 
 export type FormC<P = {}> = FC<P>;
