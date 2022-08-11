@@ -20,6 +20,7 @@ export const getFormItemFirstChildren = (children: ReactNode) => {
 };
 
 export const _onErrorClick = (errMessage: string) => {
+  if (!errMessage) return;
   Taro.showToast({
     title: errMessage,
     icon: 'none',

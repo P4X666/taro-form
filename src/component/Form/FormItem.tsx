@@ -127,7 +127,7 @@ const FormItem: FC<FormItemProps> = props => {
   );
 
   const onErrorClickHandle = useCallback(
-    () => onErrorClick(errors[0].message || ""),
+    () => onErrorClick(errors?.[0]?.message || ""),
     [errors?.[0]?.message]
   );
   const formItemWrapperProps = {
