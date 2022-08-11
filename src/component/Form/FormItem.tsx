@@ -29,6 +29,7 @@ export interface FormItemProps {
 }
 
 export type FormC<P = {}> = FC<P>;
+export const emptyFunction = () => {};
 
 const FormItem: FC<FormItemProps> = (props) => {
   const {
