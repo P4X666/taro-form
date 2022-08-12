@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist/",
   "projectname": "taro-form",
   "description": "仿照 ant design 的form设计的taro表单",
-  "appid": "wx32e32ffde74ac1cf",
+  "appid": "testAppId",
   "setting": {
     "urlCheck": true,
     "es6": true,

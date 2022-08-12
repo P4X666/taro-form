@@ -1,6 +1,7 @@
-import { useState, useReducer } from 'react';
-import Schema, { ValidateError, RuleItem } from 'async-validator';
-import { mapValues, each } from 'lodash';
+import { useState, useReducer } from "react";
+import Schema, { ValidateError, RuleItem } from "async-validator";
+import { mapValues, each } from "lodash";
+import { isObject } from "./utils";
 
 export interface ValidateErrorType extends Error {
   // 错误信息
@@ -14,12 +15,11 @@ export interface FormState {
   // 是否在提交中
   isSubmitting: boolean;
   // 错误信息
-  errors: Record<string, ValidateError[]>
+  errors: Record<string, ValidateError[]>;
 }
 
-
-export type CustomRuleFunc = ({ getFieldValue }) => RuleItem
-export type CustomRule = RuleItem | CustomRuleFunc
+export type CustomRuleFunc = ({ getFieldValue }) => RuleItem;
+export type CustomRule = RuleItem | CustomRuleFunc;
 export interface FieldDetail {
   name: string;
   value: string;
@@ -29,26 +29,26 @@ export interface FieldDetail {
 }
 
 export interface FieldsState {
-  [key: string]: FieldDetail
+  [key: string]: FieldDetail;
 }
 export interface FieldsAction {
-  type: 'addField' | 'updateValue' | 'updateValidateResult';
+  type: "addField" | "updateValue" | "updateValidateResult";
   name: string;
   value: any;
 }
 function fieldsReducer(state: FieldsState, action: FieldsAction): FieldsState {
   switch (action.type) {
-    case 'addField':
+    case "addField":
       return {
         ...state,
         [action.name]: { ...action.value }
       };
-    case 'updateValue':
+    case "updateValue":
       return {
         ...state,
         [action.name]: { ...state[action.name], value: action.value }
       };
-    case 'updateValidateResult':
+    case "updateValidateResult":
       const { isValid, errors } = action.value;
       return {
         ...state,
@@ -65,18 +65,36 @@ function useFormStore(initialValues?: Record<string, any>) {
     isSubmitting: false,
     errors: {}
   });
-  const [ fields, dispatch ] = useReducer(fieldsReducer, {});
+  const [fields, dispatch] = useReducer(fieldsReducer, {});
+  /** 获取指定域的值 */
   const getFieldValue = (key: string) => {
     return fields[key] && fields[key].value;
   };
+  /** 获取所有域的值 */
+  const getFieldsValue = () => {
+    const allFieldValues = {};
+    Object.keys(fields).forEach(item => {
+      allFieldValues[item] = fields[item].value;
+    });
+    return allFieldValues;
+  };
   const setFieldValue = (name: string, value: any) => {
     if (fields.hasOwnProperty(name)) {
-      dispatch({ type: 'updateValue', name, value });
+      dispatch({ type: "updateValue", name, value });
     }
+  };
+
+  const setFieldsValue = (userFields: Record<string, any>) => {
+    if (!isObject(userFields)) return;
+    Object.keys(userFields).forEach(name => {
+      if (fields.hasOwnProperty(name)) {
+        dispatch({ type: "updateValue", name, value: userFields[name] });
+      }
+    });
   };
   const transfromRules = (rules: CustomRule[]) => {
     return rules.map(rule => {
-      if (typeof rule === 'function') {
+      if (typeof rule === "function") {
         const calledRule = rule({ getFieldValue });
         return calledRule;
       } else {
@@ -109,7 +127,7 @@ function useFormStore(initialValues?: Record<string, any>) {
       })
       .finally(() => {
         dispatch({
-          type: 'updateValidateResult',
+          type: "updateValidateResult",
           name,
           value: { isValid, errors }
         });
@@ -124,7 +142,7 @@ function useFormStore(initialValues?: Record<string, any>) {
     const valueMap = mapValues(fields, item => item.value);
     const descriptor = mapValues(fields, item => transfromRules(item.rules));
     const validator = new Schema(descriptor);
-    return new Promise((res) => {
+    return new Promise(res => {
       validator
         .validate(valueMap)
         .catch(e => {
@@ -135,13 +153,13 @@ function useFormStore(initialValues?: Record<string, any>) {
             if (errors[name]) {
               const itemErrors = errors[name];
               dispatch({
-                type: 'updateValidateResult',
+                type: "updateValidateResult",
                 name,
                 value: { isValid: false, errors: itemErrors }
               });
             } else if (value.rules.length > 0 && !errors[name]) {
               dispatch({
-                type: 'updateValidateResult',
+                type: "updateValidateResult",
                 name,
                 value: { isValid: true, errors: [] }
               });
@@ -158,7 +176,6 @@ function useFormStore(initialValues?: Record<string, any>) {
           });
         });
     });
-
   };
   /** 重置表单数据 */
   const resetFields = () => {
@@ -169,7 +186,7 @@ function useFormStore(initialValues?: Record<string, any>) {
         if (initialValues[name]) {
           initValue = initialValues[name];
         }
-        dispatch({ type: 'updateValue', name, value: initValue});
+        dispatch({ type: "updateValue", name, value: initValue });
       });
     }
   };
@@ -179,9 +196,11 @@ function useFormStore(initialValues?: Record<string, any>) {
     dispatch,
     form,
     validateField,
-    getFieldValue,
-    setFieldValue,
     validateAllFields,
+    getFieldValue,
+    getFieldsValue,
+    setFieldValue,
+    setFieldsValue,
     resetFields
   };
 }
