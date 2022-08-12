@@ -17,14 +17,11 @@
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| name | 字段名，支持数组 | [NamePath](#NamePath) | - |  |
+| name | 字段名 | string | - |  |
 | label | `label` 标签的文本 | ReactNode | - |  |
 | getValueFromEvent | 设置如何将 event 的值转换成字段值 | (..args: any\[]) => any | - |  |
-| noStyle | 为 `true` 时不带样式，作为纯字段控件使用 | boolean | false |  |
 | required | 必填样式设置。如不设置，则会根据校验规则自动生成 | boolean | false |  |
 | rules | 校验规则，设置字段的校验逻辑。点击[此处](#components-form-demo-basic)查看示例 | [Rule](#Rule)\[] | - |  |
-| validateFirst | 当某一规则校验不通过时，是否停止剩下的规则的校验。设置 `parallel` 时会并行校验 | boolean \| `parallel` | false | `parallel`: 4.5.0 |
-| validateStatus | 校验状态，如不设置，则会根据校验规则自动生成，可选：'success' 'warning' 'error' 'validating' | string | - |  |
 | validateTrigger | 设置字段校验的时机 | `onBlur` | `onChange` | `onChange` |  |
 
 被设置了 `name` 属性的 `Form.Item` 包装的控件，表单控件会自动添加 `value` , `onChange`（或 `validateTrigger` 指定的其他属性），数据同步将被 Form 接管，这会导致以下结果：
