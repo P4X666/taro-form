@@ -91,7 +91,6 @@ export default class ImagePicker extends React.Component<ImagePickerProps> {
     const { value = [], multiple, count, sizeType, sourceType } = this.props;
     const filePathName =
       ENV === Taro.ENV_TYPE.ALIPAY ? "apFilePaths" : "tempFiles";
-    // const count = multiple ? 99 : 1
     const params: any = {};
     if (multiple) {
       params.count = 99;
@@ -145,8 +144,6 @@ export default class ImagePicker extends React.Component<ImagePickerProps> {
     const rowLength = length <= 0 ? 1 : length;
     // 行数
     const matrix = generateMatrix(value as MatrixFile[], rowLength, showAddBtn);
-    console.log(value, rowLength, showAddBtn, matrix, this.props.children);
-
     const rootCls = classNames("at-image-picker", className);
 
     return (
@@ -205,7 +202,6 @@ ImagePicker.defaultProps = {
   showAddBtn: true,
   multiple: false,
   length: 4,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: (): void => {}
 };
 
