@@ -9,7 +9,7 @@
 | --- | --- | --- | --- | --- |
 | ref | form 控制实例 | [FormInstance](#FormInstance) | - |  |
 | initialValues | 表单默认值，只有初始化以及重置时生效 | object | - |  |
-| onFieldsChange | 字段更新时触发回调事件 | function(changedFields, allFields) | - |  |
+| onFieldsChange | 字段更新时触发回调事件 | function(changedFields) | - |  |
 
 ## Form.Item
 
@@ -44,7 +44,8 @@
 
 #### Rule
 
-Rule 支持接收 object 进行配置，也支持 function 来动态获取 form 的数据：
+Rule 支持接收 object 进行配置，也支持 function 来动态获取 form 的数据：  
+更多请参考[此处](https://github.com/yiminghe/async-validator#type)
 
 | 名称 | 说明 | 类型 | 版本 |
 | --- | --- | --- | --- |
@@ -58,7 +59,7 @@ Rule 支持接收 object 进行配置，也支持 function 来动态获取 form 
 | pattern | 正则表达式匹配 | RegExp |  |
 | required | 是否为必选字段 | boolean |  |
 | transform | 将字段值转换成目标值后进行校验 | (value) => any |  |
-| type | 类型，常见有 `string` \|`number` \|`boolean` \|`url` \| `email`。更多请参考[此处](https://github.com/yiminghe/async-validator#type) | string |  |
+| type | 类型，常见有 `string` \|`number` \|`boolean` \|`url` \| `email`。 | string |  |
 | validateTrigger | 设置触发验证时机，必须是 Form.Item 的 `validateTrigger` 的子集 | string \| string\[] |  |
 | validator | 自定义校验，接收 Promise 作为返回值。[示例](#components-form-demo-register)参考 | ([rule](#Rule), value) => Promise |  |
 | whitespace | 如果字段仅包含空格则校验不通过，只在 `type: 'string'` 时生效 | boolean |  |

@@ -35,8 +35,11 @@ export interface FormItemProps {
   /** 子组件是否为上下结构 */
   isNewLine?: boolean;
   className?: string;
+  /** 底部 border */
   border?: boolean;
   onErrorClick?: () => void;
+  /** 必填样式设置。如不设置，则会根据校验规则自动生成 */
+  required?: boolean;
 }
 
 export type FormC<P = {}> = FC<P>;
@@ -54,6 +57,7 @@ const FormItem: FC<FormItemProps> = props => {
     isNewLine = false,
     className = "",
     border = true,
+    required = false,
     onErrorClick = _onErrorClick
   } = props as SomeRequired<
     FormItemProps,
@@ -92,7 +96,7 @@ const FormItem: FC<FormItemProps> = props => {
   const errors = fieldState && fieldState.errors;
   const hasError = errors && errors.length > 0;
   // 支持自定义校验
-  const isRequired = rules?.some(
+  const isRequired = required || rules?.some(
     rule => typeof rule !== "function" && rule.required
   );
 
