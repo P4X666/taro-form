@@ -36,6 +36,16 @@ export interface FieldsAction {
   name: string;
   value: any;
 }
+interface validResult {
+  /** 表单内容是否合法 */
+  isValid: boolean;
+  /** 错误信息 */
+  errors: Record<string, any>;
+  values: {
+    [name: string]: string;
+  };
+}
+
 function fieldsReducer(state: FieldsState, action: FieldsAction): FieldsState {
   switch (action.type) {
     case "addField":
@@ -146,19 +156,11 @@ function useFormStore(initialValues?: Record<string, any>) {
         });
       });
   };
-  interface validResult {
-    /** 表单内容是否合法 */
-    isValid: boolean;
-    /** 错误信息 */
-    errors: Record<string, any>;
-    values: {
-      [name: string]: string;
-    };
-  }
+
   /** 校验表单所有子项 */
   const validateAllFields = () => {
     // 开始提交
-    setForm({...form, isSubmitting: true});
+    setForm({ ...form, isSubmitting: true });
     let isValid = true;
     let errors = {};
     const valueMap = mapValues(fields, item => item.value);
