@@ -5,10 +5,13 @@ import { AtDivider } from 'taro-ui';
 import { FormCheckbox, FormInput } from 'src/component/FormComponent';
 import styles from './index.module.less';
 import React from 'react';
+import { FormInstance } from "src/component/Form/Form";
 
 const SimpleFormExample = () => {
 
-  const formRef: MutableRefObject<any> = useRef(null);
+  const formRef: MutableRefObject<FormInstance> = useRef() as MutableRefObject<
+    FormInstance
+  >;
   const custFormRef: MutableRefObject<any> = useRef(null);
 
   const onSubmit = () => {
@@ -16,7 +19,7 @@ const SimpleFormExample = () => {
       if (isValid) {
         console.log('验证通过，表单的值为：', values);
       } else {
-        console.log('验证未通过，表单的值为：', values);
+        console.log("验证未通过，表单的值为：", values);
         console.log('错误信息为：', errors);
       }
     });

@@ -80,7 +80,11 @@ function useFormStore(initialValues?: Record<string, any>) {
   };
   const setFieldValue = (name: string, value: any) => {
     if (fields.hasOwnProperty(name)) {
-      dispatch({ type: "updateValue", name, value });
+      dispatch({
+        type: "updateValue",
+        name,
+        value
+      });
     }
   };
 
@@ -88,14 +92,20 @@ function useFormStore(initialValues?: Record<string, any>) {
     if (!isObject(userFields)) return;
     Object.keys(userFields).forEach(name => {
       if (fields.hasOwnProperty(name)) {
-        dispatch({ type: "updateValue", name, value: userFields[name] });
+        dispatch({
+          type: "updateValue",
+          name,
+          value: userFields[name]
+        });
       }
     });
   };
   const transfromRules = (rules: CustomRule[]) => {
     return rules.map(rule => {
       if (typeof rule === "function") {
-        const calledRule = rule({ getFieldValue });
+        const calledRule = rule({
+          getFieldValue
+        });
         return calledRule;
       } else {
         return rule;
@@ -129,20 +139,32 @@ function useFormStore(initialValues?: Record<string, any>) {
         dispatch({
           type: "updateValidateResult",
           name,
-          value: { isValid, errors }
+          value: {
+            isValid,
+            errors
+          }
         });
       });
   };
+  interface validResult {
+    /** 表单内容是否合法 */
+    isValid: boolean;
+    /** 错误信息 */
+    errors: Record<string, any>;
+    values: {
+      [name: string]: string;
+    };
+  }
   /** 校验表单所有子项 */
   const validateAllFields = () => {
     // 开始提交
-    setForm({ ...form, isSubmitting: true });
+    setForm({...form, isSubmitting: true});
     let isValid = true;
     let errors = {};
     const valueMap = mapValues(fields, item => item.value);
     const descriptor = mapValues(fields, item => transfromRules(item.rules));
     const validator = new Schema(descriptor);
-    return new Promise(res => {
+    return new Promise<validResult>(res => {
       validator
         .validate(valueMap)
         .catch(e => {
@@ -155,20 +177,31 @@ function useFormStore(initialValues?: Record<string, any>) {
               dispatch({
                 type: "updateValidateResult",
                 name,
-                value: { isValid: false, errors: itemErrors }
+                value: {
+                  isValid: false,
+                  errors: itemErrors
+                }
               });
             } else if (value.rules.length > 0 && !errors[name]) {
               dispatch({
                 type: "updateValidateResult",
                 name,
-                value: { isValid: true, errors: [] }
+                value: {
+                  isValid: true,
+                  errors: []
+                }
               });
             }
             //  有对应的 rules，并且没有 errors
           });
         })
         .finally(() => {
-          setForm({ ...form, isSubmitting: false, isValid, errors });
+          setForm({
+            ...form,
+            isSubmitting: false,
+            isValid,
+            errors
+          });
           res({
             isValid,
             errors,
@@ -186,7 +219,11 @@ function useFormStore(initialValues?: Record<string, any>) {
         if (initialValues[name]) {
           initValue = initialValues[name];
         }
-        dispatch({ type: "updateValue", name, value: initValue });
+        dispatch({
+          type: "updateValue",
+          name,
+          value: initValue
+        });
       });
     }
   };
