@@ -47,4 +47,4 @@ export const overlaidOriginalAttr = (controlProps: Record<string, any>) => {
   addNonRequiredAttr(controlProps, targetAttr);
 };
 
-export const isObject = (data: any) => Object.prototype.toString.call(data) === "[object Object]";
+export const isObject = (data: any):boolean => Object.prototype.toString.call(data) === "[object Object]";
