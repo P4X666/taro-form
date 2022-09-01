@@ -5,11 +5,12 @@ import Form from 'src/component/Form';
 import Taro from '@tarojs/taro';
 import { gradeList, multiSelector } from 'src/utils/constent';
 import { FormImagePicker, FormInput, FormPicker, FormRate, FormSwitch } from 'src/component/FormComponent';
+import { FormInstance } from "src/component/Form/types/Form";
 import styles from './index.module.less';
 
 const FormExample = () => {
 
-  const formRef: MutableRefObject<any> = useRef(null);
+  const formRef = useRef() as MutableRefObject<FormInstance>;
 
   const onSubmit = () => {
     formRef.current.validateAllFields().then(({ isValid, errors, values }) => {

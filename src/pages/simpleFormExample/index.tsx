@@ -1,18 +1,15 @@
-import { MutableRefObject, useRef } from 'react';
+import React, { MutableRefObject, useRef } from 'react';
 import { View, Button } from '@tarojs/components';
 import Form from 'src/component/Form';
 import { AtDivider } from 'taro-ui';
 import { FormCheckbox, FormInput } from 'src/component/FormComponent';
+import { FormInstance } from 'src/component/Form/types/Form';
 import styles from './index.module.less';
-import React from 'react';
-import { FormInstance } from "src/component/Form/Form";
 
 const SimpleFormExample = () => {
 
-  const formRef: MutableRefObject<FormInstance> = useRef() as MutableRefObject<
-    FormInstance
-  >;
-  const custFormRef: MutableRefObject<any> = useRef(null);
+  const formRef = useRef() as MutableRefObject<FormInstance>;
+  const custFormRef = useRef() as MutableRefObject<FormInstance>;
 
   const onSubmit = () => {
     formRef.current.validateAllFields().then(({ isValid, errors, values }) => {
