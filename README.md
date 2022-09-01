@@ -63,3 +63,28 @@ Rule 支持接收 object 进行配置，也支持 function 来动态获取 form 
 | validateTrigger | 设置触发验证时机，必须是 Form.Item 的 `validateTrigger` 的子集 | string \| string\[] |  |
 | validator | 自定义校验，接收 Promise 作为返回值。[示例](#components-form-demo-register)参考 | ([rule](#Rule), value) => Promise |  |
 | whitespace | 如果字段仅包含空格则校验不通过，只在 `type: 'string'` 时生效 | boolean |  |
+
+## class 组件及 function 组件各自获取ref的方式
+### 1. class 组件
+
+```jsx
+import React, { Component, createRef } from 'react';
+...
+constructor(props) {
+  super(props);
+  this.formRef= createRef();
+}
+...
+<Form ref={this.formRef}>...</Form>
+```
+
+### 2. function 组件
+
+```jsx
+import React, { useRef } from 'react';
+...
+const formRef = useRef();
+...
+<Form ref={formRef}>...</Form>
+...
+```
