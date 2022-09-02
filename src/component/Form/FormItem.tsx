@@ -14,6 +14,8 @@ import {
 import { FormContext } from "./Form";
 import { FormItemProps, SomeRequired } from "./types/FormItem";
 
+export type FormC<P = {}> = FC<P>;
+
 export const emptyFunction = () => {};
 
 const FormItem: FC<FormItemProps> = props => {
