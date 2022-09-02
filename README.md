@@ -1,6 +1,49 @@
 # taro-form
 仿照 ant design 的form设计的taro表单
 
+## 使用方式
+直接在项目中按如下方式引入即可
+```jsx
+import Form, { FormSwitch, ... } from 'fe-taro-form';
+/** 
+ * css可以在当前组件中引入并使用，也可放在项目入口文件中引入使用
+ * css文件的大小在2kb以下，引入方式并不会产生实质的区别
+ *  */
+import 'fe-taro-form/dist/index.css';
+...
+<Form ref={formRef} initialValues={{switch: true}}>
+...
+  <Form.Item label='FormSwitch' name='switch'>
+    <FormSwitch />
+  </Form.Item>
+...
+</Form>
+...
+```
+## class 组件及 function 组件各自获取ref的方式
+### 1. class 组件
+
+```jsx
+import React, { Component, createRef } from 'react';
+...
+constructor(props) {
+  super(props);
+  this.formRef= createRef();
+}
+...
+<Form ref={this.formRef}>...</Form>
+```
+
+### 2. function 组件
+
+```jsx
+import React, { useRef } from 'react';
+...
+const formRef = useRef();
+...
+<Form ref={formRef}>...</Form>
+...
+```
 ## API
 
 ### Form
@@ -63,28 +106,3 @@ Rule 支持接收 object 进行配置，也支持 function 来动态获取 form 
 | validateTrigger | 设置触发验证时机，必须是 Form.Item 的 `validateTrigger` 的子集 | string \| string\[] |  |
 | validator | 自定义校验，接收 Promise 作为返回值。[示例](#components-form-demo-register)参考 | ([rule](#Rule), value) => Promise |  |
 | whitespace | 如果字段仅包含空格则校验不通过，只在 `type: 'string'` 时生效 | boolean |  |
-
-## class 组件及 function 组件各自获取ref的方式
-### 1. class 组件
-
-```jsx
-import React, { Component, createRef } from 'react';
-...
-constructor(props) {
-  super(props);
-  this.formRef= createRef();
-}
-...
-<Form ref={this.formRef}>...</Form>
-```
-
-### 2. function 组件
-
-```jsx
-import React, { useRef } from 'react';
-...
-const formRef = useRef();
-...
-<Form ref={formRef}>...</Form>
-...
-```
