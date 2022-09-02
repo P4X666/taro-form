@@ -9,14 +9,14 @@ export interface FormProps {
   children: JSX.Element[] | RenderProps;
   /** 字段更新时触发回调事件 */
   onFieldsChange?: (changedValues: Record<string, any>) => void;
+  className?: string
 }
 
 export type IFormContext = Pick<
   ReturnType<typeof useFormStore>,
   "dispatch" | "fields" | "validateField"
 > &
-  Pick<FormProps, "initialValues"> &
-  Pick<FormProps, "onFieldsChange">;
+  Omit<FormProps, "children">;
 
 export type FormInstance = Omit<
   ReturnType<typeof useFormStore>,

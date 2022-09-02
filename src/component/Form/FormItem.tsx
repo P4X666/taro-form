@@ -39,7 +39,8 @@ const FormItem: FC<FormItemProps> = props => {
     fields,
     initialValues,
     validateField,
-    onFieldsChange = emptyFunction
+    onFieldsChange = emptyFunction,
+    className: formClass
   } = useContext(FormContext);
 
   useEffect(() => {
@@ -112,7 +113,7 @@ const FormItem: FC<FormItemProps> = props => {
     isNewLine,
     onErrorClick: onErrorClickHandle,
     border,
-    className
+    className: formClass + " " + className
   };
   return (
     <FormComponentWrapper {...formItemWrapperProps}>

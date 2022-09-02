@@ -10,7 +10,7 @@ import {FormInstance, FormProps, IFormContext} from "./types/Form"
 export const FormContext = createContext<IFormContext>({} as IFormContext);
 
 const Form = forwardRef<FormInstance, FormProps>((props, ref) => {
-    const { children, initialValues, onFieldsChange } = props;
+    const { children, initialValues, onFieldsChange, className='' } = props;
     const { form, fields, dispatch, ...restProps } = useFormStore(
       initialValues
     );
@@ -29,7 +29,8 @@ const Form = forwardRef<FormInstance, FormProps>((props, ref) => {
       fields,
       initialValues,
       validateField,
-      onFieldsChange
+      onFieldsChange,
+      className
     };
 
     // 支持自定义渲染
