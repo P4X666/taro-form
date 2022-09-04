@@ -86,15 +86,16 @@ const ImagePicker: FC<ImagePickerProps> = props => {
 
   const {
     value = [],
-    multiple,
+    multiple = false,
     count,
     sizeType,
     sourceType,
-    className,
-    customStyle,
-    mode,
+    className = "",
+    customStyle = "",
+    mode = "aspectFill",
     length = 4,
-    showAddBtn = true
+    showAddBtn = true,
+    onChange = (): void => {}
   } = props;
 
   const chooseFile = (): void => {
@@ -120,7 +121,7 @@ const ImagePicker: FC<ImagePickerProps> = props => {
           file: res[filePathName][i]
         }));
         const newFiles = value.concat(targetFiles);
-        props.onChange(newFiles, "add");
+        onChange(newFiles, "add");
       })
       .catch(props.onFail);
   };
@@ -136,7 +137,7 @@ const ImagePicker: FC<ImagePickerProps> = props => {
       window.URL.revokeObjectURL(value[idx].url);
     }
     const newFiles = value.filter((_, i) => i !== idx);
-    props.onChange(newFiles, "remove", idx);
+    onChange(newFiles, "remove", idx);
   };
 
   const rowLength = length <= 0 ? 1 : length;
@@ -188,15 +189,6 @@ const ImagePicker: FC<ImagePickerProps> = props => {
   );
 };
 
-ImagePicker.defaultProps = {
-  className: "",
-  customStyle: "",
-  value: [],
-  mode: "aspectFill",
-  showAddBtn: true,
-  multiple: false,
-  length: 4,
-  onChange: (): void => {}
-};
+
 
 export default ImagePicker;
