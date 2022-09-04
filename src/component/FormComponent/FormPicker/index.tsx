@@ -38,7 +38,7 @@ const FormPicker: FormC<
   const fullWidth = { flex: 1 };
 
   const _onChange = (e: BaseEventOrig): string | number | Array | Object => {
-    onChange && onChange(e.detail.value);
+    onChange?.(e.detail.value);
   };
   /** hyphens 连接符 默认是空字符串 */
   const showValue = () => {
