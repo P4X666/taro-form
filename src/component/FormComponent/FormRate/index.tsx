@@ -5,7 +5,8 @@ import { FormC } from 'src/component/Form/FormItem';
 import { FormRateProps } from './FormRate';
 
 const FormRate: FormC<FormRateProps> = (props) => {
-  return <AtRate {...props} />;
+  const { value, ...restProps } = props;
+  return <AtRate value={+ value!} {...restProps} />;
 };
 FormRate.displayName = 'FormItem';
 export default FormRate;

@@ -5,7 +5,7 @@ import { FormSwitchProps } from './FormSwitch';
 
 const FormSwitch: FormC<FormSwitchProps> = (props) => {
   const { value, ...restProps } = props;
-  return <AtSwitch checked={value} {...restProps} />;
+  return <AtSwitch checked={!!value} {...restProps} />;
 };
 FormSwitch.displayName = 'FormItem';
 export default FormSwitch;
