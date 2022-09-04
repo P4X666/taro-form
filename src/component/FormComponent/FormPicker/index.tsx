@@ -50,8 +50,8 @@ const FormPicker: FormC<
       }
       return result;
     }
-
-    if (value) {
+    /** 修复在h5，picker无法选中第一个 */
+    if (value || value === 0) {
       if (["date", "time"].includes(mode) || !mode) {
         return value;
       }
