@@ -29,6 +29,7 @@ const FormPicker: FormC<
     value = "",
     onClick,
     onChange,
+    rangeKey,
     /** 连字符 */
     hyphens = " ",
     ...restProps
@@ -55,7 +56,8 @@ const FormPicker: FormC<
       if (["date", "time"].includes(mode) || !mode) {
         return value;
       }
-      return range[value];
+      const val = range[value];
+      return rangeKey ? val[rangeKey] : val;
     }
     return undefined;
   };
