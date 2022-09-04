@@ -3,7 +3,8 @@ import React, {
   useEffect,
   FC,
   MouseEvent,
-  useCallback
+  useCallback,
+  useMemo
 } from "react";
 import FormComponentWrapper from "./FormComponentWrapper";
 import {
@@ -99,10 +100,11 @@ const FormItem: FC<FormItemProps> = props => {
   // 3 cloneElement，混合这个child 以及 手动的属性列表
   // 在混合时需要将 label, required, error, onErrorClick, border 属性拦截
   const nodeProps = { ...child.props, ...controlProps };
-  const returnChildNode = React.cloneElement(
+
+  const returnChildNode = useMemo(()=>React.cloneElement(
     child,
     nodeProps as { value: any; onChange: (e: MouseEvent) => void }
-  );
+  ), [nodeProps.value]);
 
   const onErrorClickHandle = useCallback(
     () => onErrorClick(errors?.[0]?.message || ""),

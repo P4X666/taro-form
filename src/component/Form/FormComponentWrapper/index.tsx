@@ -23,7 +23,7 @@ export interface FormComponentWrapperProps{
 }
 
 const FormComponentWrapper: FC<FormComponentWrapperProps> = (props) => {
-  const { className, label, required, error, onErrorClick, border, isNewLine} = props;
+  const { className, label, required, error, onErrorClick, border, isNewLine } = props;
   const wrapperClass = classNames(className, 'form-component-wrapper', {
     'form-component-wrapper--border': border,
     'form-component-wrapper--new_line': isNewLine,
