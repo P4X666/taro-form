@@ -3,7 +3,7 @@ import React, { MutableRefObject, useRef } from "react";
 import { View, Button } from "@tarojs/components";
 import Form from "src/component/Form";
 import Taro from "@tarojs/taro";
-import { gradeList, multiSelector } from "src/utils/constent";
+import { gradeList, multiSelectorObj } from "src/utils/constent";
 import {
   FormImagePicker,
   FormInput,
@@ -48,8 +48,8 @@ const FormExample = () => {
           ref={formRef}
           initialValues={{
             username: "用户名1",
-            singleSelect: gradeList[0],
-            multiSelect: [multiSelector[0][0], multiSelector[1][0]],
+            singleSelect: 1,
+            multiSelect: [multiSelectorObj[0][0].value, multiSelectorObj[1][0].value],
             dateSelect: "2022-09-05"
           }}
         >
@@ -86,20 +86,28 @@ const FormExample = () => {
             label="单个选项"
             name="singleSelect"
             rules={[
-              { type: "string", required: true, message: "请选择单个选项" }
+              { type: "number", required: true, message: "请选择单个选项" }
             ]}
           >
-            <FormPicker mode="selector" range={gradeList}></FormPicker>
+            <FormPicker
+              mode="selector"
+              range={gradeList}
+              fieldNames={{ value: "value", label: "label" }}
+            ></FormPicker>
           </Form.Item>
 
           <Form.Item
             label="多个选项"
             name="multiSelect"
             rules={[
-              { type: "string", required: true, message: "请选择多个选项" }
+              { type: "array", required: true, message: "请选择多个选项" }
             ]}
           >
-            <FormPicker mode="multiSelector" range={multiSelector}></FormPicker>
+            <FormPicker
+              mode="multiSelector"
+              range={multiSelectorObj}
+              fieldNames={{ value: "value", label: "label" }}
+            ></FormPicker>
           </Form.Item>
           <Form.Item
             label="选择日期"
