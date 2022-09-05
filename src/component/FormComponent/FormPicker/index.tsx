@@ -4,7 +4,7 @@ import React from "react";
 import { Picker, BaseEventOrig } from "@tarojs/components";
 import { useMemo } from "react";
 import { AtList, AtListItem } from "taro-ui";
-import { FormC, SomeRequired } from "src/component/Form/FormItem";
+import { emptyFunction, FormC, SomeRequired } from "src/component/Form/FormItem";
 import {
   FormPickerSimpleProps,
   FormPickerMultiSelectorProps,
@@ -27,7 +27,7 @@ const FormPicker: FormC<
     // 范围
     range,
     value = "",
-    onClick,
+    onClick = emptyFunction,
     onChange,
     rangeKey,
     /** 连字符 */
@@ -38,7 +38,16 @@ const FormPicker: FormC<
   const fullWidth = { flex: 1 };
 
   const _onChange = (e: BaseEventOrig): string | number | Array | Object => {
-    onChange?.(e.detail.value);
+    if (mode === "selector") {
+      return onChange(range[e.detail.value]);
+    }
+    if (mode === "multiSelector") {
+      return onChange([
+        range[0][e.detail.value[0]],
+        range[1][e.detail.value[1]]
+      ]);
+    }
+    onChange(e.detail.value);
   };
   /** hyphens 连接符 默认是空字符串 */
   const showValue = () => {
@@ -46,18 +55,14 @@ const FormPicker: FormC<
       let result = "";
       let i = 0;
       while (i < value.length) {
-        result += hyphens + range[i][value[i] as string];
+        result += hyphens + value[i];
         i++;
       }
       return result;
     }
-    /** 修复在h5，picker无法选中第一个 */
+    /** 修复在h5，picker无法选中0 */
     if (value || value === 0) {
-      if (["date", "time"].includes(mode) || !mode) {
-        return value;
-      }
-      const val = range[value];
-      return rangeKey ? val[rangeKey] : val;
+      return value;
     }
     return undefined;
   };
