@@ -1,3 +1,4 @@
+import React from 'react'
 import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import './index.less'
