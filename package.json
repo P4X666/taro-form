@@ -51,6 +51,7 @@
     "dev:quickapp": "npm run build:quickapp -- --watch",
     "clean": "rimraf ./dist",
     "lint": "eslint --ext ts,tsx src --max-warnings 5",
+    "test": "rollup --config ./rollup/rollup.config.analyze.js",
     "build-es": "npm run clean && rollup --config rollup/rollup.esm.config.js"
   },
   "browserslist": [
