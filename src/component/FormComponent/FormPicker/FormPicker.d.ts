@@ -10,15 +10,21 @@ export interface FormPickerSimpleProps {
  * 多列选择器：mode = multiSelector
  * 覆盖 taro-ui 原有的类型 在原有的基础上加上了 hyphens 连字符
  *  */
-export interface FormPickerMultiSelectorProps extends Omit<PickerMultiSelectorProps, 'value' | 'onChange'> {
-  value?: string
+export interface FormPickerMultiSelectorProps
+  extends Omit<PickerMultiSelectorProps, "value" | "onChange"> {
+  value?: string;
   /**
    * 当 value 改变时触发 change 事件，event.detail = {value}
    * @supported weapp, h5, rn
    */
-  onChange?: CommonEventFunction<PickerMultiSelectorProps.ChangeEventDetail>
+  onChange?: CommonEventFunction<PickerMultiSelectorProps.ChangeEventDetail>;
   /** 连字符 */
-  hyphens?: string
+  hyphens?: string;
+  /** 自定义节点 label、value 的字段 用法仿照 select */
+  fieldNames?: {
+    value: string;
+    label: string;
+  };
 }
 
 export interface FormPickerTimeProps extends Omit<PickerTimeProps, 'value' | 'onChange'> {
@@ -48,11 +54,17 @@ export interface FormPickerRegionProps extends Omit<PickerRegionProps, 'value' |
   onChange?: CommonEventFunction<PickerRegionProps.ChangeEventDetail>
 }
 
-export interface FormPickerSelectorProps extends Omit<PickerSelectorProps, 'value' | 'onChange'> {
-  value?: string
+export interface FormPickerSelectorProps
+  extends Omit<PickerSelectorProps, "value" | "onChange"> {
+  value?: string;
   /**
    * 当 value 改变时触发 change 事件，event.detail = {value}
    * @supported weapp, h5, rn
    */
-  onChange?: CommonEventFunction<PickerSelectorProps.ChangeEventDetail>
+  onChange?: CommonEventFunction<PickerSelectorProps.ChangeEventDetail>;
+  /** 自定义节点 label、value 的字段 用法仿照 select */
+  fieldNames?: {
+    value: string;
+    label: string;
+  };
 }

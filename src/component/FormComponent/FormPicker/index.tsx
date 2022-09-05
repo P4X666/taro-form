@@ -2,9 +2,12 @@
 // AtList 类型“{ children: (string | Element)[]; } ”与类型“IntrinsicAttributes & IntrinsicClassAttributes<Component<AtListProps, any, any>> & Readonly < AtListProps >”不具有相同的属性。
 import React from "react";
 import { Picker, BaseEventOrig } from "@tarojs/components";
-import { useMemo } from "react";
 import { AtList, AtListItem } from "taro-ui";
-import { FormC, SomeRequired } from "src/component/Form/FormItem";
+import {
+  emptyFunction,
+  FormC,
+  SomeRequired
+} from "src/component/Form/FormItem";
 import {
   FormPickerSimpleProps,
   FormPickerMultiSelectorProps,
@@ -27,9 +30,9 @@ const FormPicker: FormC<
     // 范围
     range,
     value = "",
-    onClick,
+    onClick = emptyFunction,
     onChange,
-    rangeKey,
+    fieldNames,
     /** 连字符 */
     hyphens = " ",
     ...restProps
@@ -38,38 +41,72 @@ const FormPicker: FormC<
   const fullWidth = { flex: 1 };
 
   const _onChange = (e: BaseEventOrig): string | number | Array | Object => {
-    onChange?.(e.detail.value);
+    if (mode === "selector") {
+      const returnValue = range[e.detail.value];
+      return onChange(fieldNames ? returnValue[fieldNames.value] : returnValue);
+    }
+    if (mode === "multiSelector") {
+      const returnValue0 = range[0][e.detail.value[0]];
+      const returnValue1 = range[1][e.detail.value[1]];
+      return onChange(
+        fieldNames
+          ? [returnValue0[fieldNames.value], returnValue1[fieldNames.value]]
+          : [returnValue0, returnValue1]
+      );
+    }
+    onChange(e.detail.value);
   };
   /** hyphens 连接符 默认是空字符串 */
   const showValue = () => {
     if (Array.isArray(value)) {
+      // multiSelector
       let result = "";
       let i = 0;
       while (i < value.length) {
-        result += hyphens + range[i][value[i] as string];
+        if (fieldNames) {
+          result +=
+            hyphens +
+            range[i].find(
+              (item: { [x: string]: any }) => item[fieldNames.value] === value[i]
+            )?.[fieldNames.label];
+        }else{
+          result += hyphens + value[i];
+        }
         i++;
       }
       return result;
     }
-    /** 修复在h5，picker无法选中第一个 */
+    /** 修复在h5，picker无法选中0 */
     if (value || value === 0) {
-      if (["date", "time"].includes(mode) || !mode) {
-        return value;
+      if (mode === "selector" && fieldNames) {
+        return range.find(
+          (item: { [x: string]: any }) => item[fieldNames.value] === value
+        )?.[fieldNames.label];
       }
-      const val = range[value];
-      return rangeKey ? val[rangeKey] : val;
+      return value;
     }
     return undefined;
   };
 
-  const renderValue = useMemo(() => {
-    return showValue();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range, value]);
+  const renderValue = showValue();
+
+  const getRange = () => {
+    if (mode === "selector") {
+      return fieldNames
+        ? range.map((item: { [x: string]: any }) => item[fieldNames.label])
+        : range;
+    }
+    if (mode === "multiSelector") {
+      return fieldNames
+        ? range.map((ele: { [x: string]: any; }[]) => ele.map((item: { [x: string]: any }) => item[fieldNames.label]))
+        : range;
+    }
+    return range;
+  };
   return mode !== undefined ? (
     <Picker
       mode={mode}
-      range={range}
+      range={getRange()}
       style={fullWidth}
       onChange={_onChange}
       {...restProps}
