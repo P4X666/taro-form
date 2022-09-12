@@ -1,9 +1,64 @@
 @error: #ff4949;
 
+.form-component-wrapper-h5 {
+  padding: 12px 0;
+  .form-component-content-space {
+    padding-top: 10px;
+  }
+  .formLabel--require {
+    &::before {
+      display: inline-block;
+      margin-right: 4px;
+      color: @error;
+      font-size: 14px;
+      line-height: 1;
+      content: "*";
+    }
+  }
+  .at-rate {
+    margin-top: 3px;
+    padding-left: 12px;
+  }
+  .at-list {
+    .at-list__item {
+      padding: 0 18px 0 0;
+      .at-list__item-extra {
+        min-height: 26px;
+      }
+    }
+  }
+}
+.form-component-wrapper-weapp {
+  padding: 24px 0;
+  .form-component-content-space {
+    padding-top: 20px;
+  }
+  .formLabel--require {
+    &::before {
+      display: inline-block;
+      margin-right: 8px;
+      color: @error;
+      font-size: 28px;
+      line-height: 1;
+      content: "*";
+    }
+  }
+  .at-rate {
+    margin-top: 6px;
+    padding-left: 24px;
+  }
+  .at-list {
+    .at-list__item {
+      padding: 0 36px 0 0;
+      .at-list__item-extra {
+        min-height: 52px;
+      }
+    }
+  }
+}
 .form-component-wrapper {
   display: flex;
   width: 100%;
-  padding: 24px 0;
   background-color: #fff;
   // 覆盖 taro-ui 的样式
   .at-input {
@@ -12,7 +67,7 @@
     &::after {
       border: none;
     }
-    .at-input__children::after{
+    .at-input__children::after {
       border: none;
     }
   }
@@ -24,13 +79,9 @@
     .at-switch__title {
       display: none;
     }
-    .at-switch__container{
+    .at-switch__container {
       flex-direction: row;
     }
-  }
-  .at-rate {
-    margin-top: 6px;
-    padding-left: 24px;
   }
 
   .at-list {
@@ -39,18 +90,14 @@
       border: none;
     }
     .at-list__item {
-      padding: 0 36px 0 0;
       &::after {
         border: none;
-      }
-      .at-list__item-extra {
-        min-height: 52px;
       }
       .item-extra__icon-arrow {
         color: #ccc;
         font-size: inherit;
       }
-      &.item-extra__info{
+      &.item-extra__info {
         font-size: inherit;
       }
     }
@@ -62,30 +109,17 @@
   .form-component-content {
     flex: 1;
   }
-  .form-component-content-space {
-    padding-top: 20px;
-  }
 }
-.form-component-wrapper--border { 
+.form-component-wrapper--border {
   border-bottom: 1px solid #eee;
 }
-.formLabel--require {
-  &::before {
-    display: inline-block;
-    margin-right: 8rpx;
-    color: @error;
-    font-size: 28rpx;
-    font-family: SimSun, sans-serif;
-    line-height: 1;
-    content: "*";
-  }
-}
+
 .formLabel--error {
   display: flex;
   align-items: center;
   color: @error;
 }
 
-.form-component-wrapper--new_line{
+.form-component-wrapper--new_line {
   display: block;
 }

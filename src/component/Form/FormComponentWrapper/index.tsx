@@ -1,4 +1,5 @@
 import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 import React, { ReactNode, FC } from 'react';
 import './index.less';
@@ -22,9 +23,17 @@ export interface FormComponentWrapperProps{
   children: ReactNode
 }
 
+const ENV = Taro.getEnv();
+
 const FormComponentWrapper: FC<FormComponentWrapperProps> = (props) => {
   const { className, label, required, error, onErrorClick, border, isNewLine } = props;
-  const wrapperClass = classNames(className, 'form-component-wrapper', {
+  const wrapperClass = classNames(
+    className,
+    'form-component-wrapper',
+    ENV === Taro.ENV_TYPE.WEB
+      ? 'form-component-wrapper-h5'
+      : 'form-component-wrapper-weapp',
+    {
     'form-component-wrapper--border': border,
     'form-component-wrapper--new_line': isNewLine,
   });
