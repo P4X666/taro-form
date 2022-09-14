@@ -1,17 +1,17 @@
 import React, { MutableRefObject, useRef } from "react";
 
 import { View, Button } from "@tarojs/components";
-import Form from "src/component/Form";
-import Taro from "@tarojs/taro";
-import { gradeList, multiSelectorObj } from "src/utils/constent";
-import {
+import Form, {
   FormImagePicker,
   FormInput,
   FormPicker,
   FormRate,
-  FormSwitch
-} from "src/component/FormComponent";
-import { FormInstance } from "src/component/Form/types/Form";
+  FormSwitch,
+  FormInstance
+} from "fe-taro-form";
+import Taro from "@tarojs/taro";
+import { gradeList, multiSelectorObj } from "src/utils/constent";
+import "fe-taro-form/dist/index.css";
 import styles from "./index.module.less";
 
 const FormExample = () => {
