@@ -235,12 +235,19 @@ function useFormStore(initialValues?: Record<string, any>) {
     fields,
     dispatch,
     form,
+    /** 校验表单域内指定的值 */
     validateField,
+    /** 校验表单域内所有的值 */
     validateAllFields,
+    /** 获取表单域内指定的值 */
     getFieldValue,
+    /** 获取表单域内所有的值 */
     getFieldsValue,
+    /** 设置表单域内指定的值 */
     setFieldValue,
+    /** 设置表单域内部分或全部的值 */
     setFieldsValue,
+    /** 重置表单域 */
     resetFields
   };
 }
