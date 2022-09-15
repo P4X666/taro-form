@@ -12,7 +12,6 @@ import { FormPickerSimpleProps,
 import { FormRateProps } from "./src/component/FormComponent/FormRate/FormRate";
 import { FormSwitchProps } from "./src/component/FormComponent/FormSwitch/FormSwitch";
 import Form from "./src/component/Form/index";
-import { FormInstance } from "./src/component/Form/Form";
 
 declare const ImagePicker: FormC<ImagePickerProps>;
 declare const FormCheckbox: FormC<FormCheckboxProps<any>>
@@ -37,6 +36,5 @@ export {
   FormPicker,
   FormRate,
   FormSwitch,
-  Form,
-  FormInstance
+  Form
 };
