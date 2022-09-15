@@ -36,5 +36,5 @@ export {
   FormPicker,
   FormRate,
   FormSwitch,
-  Form,
+  Form
 };

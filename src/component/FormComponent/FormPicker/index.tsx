@@ -38,8 +38,6 @@ const FormPicker: FormC<
     ...restProps
   } = props as SomeRequired<FormPickerMultiSelectorProps, "hyphens">;
 
-  const fullWidth = { flex: 1 };
-
   const _onChange = (e: BaseEventOrig): string | number | Array | Object => {
     if (mode === "selector") {
       const returnValue = range[e.detail.value];
@@ -107,7 +105,6 @@ const FormPicker: FormC<
     <Picker
       mode={mode}
       range={getRange()}
-      style={fullWidth}
       onChange={_onChange}
       {...restProps}
     >
