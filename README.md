@@ -1,8 +1,8 @@
 # taro-form
-仿照 ant design 的form设计的taro表单
+仿照 ant design 的form设计的taro表单，理论上和taro保持一致的兼容性，目前已验证微信小程序和h5
 
 ## 使用方式
-直接在项目中按如下方式引入即可
+1. 直接在项目中按如下方式引入
 ```jsx
 import Form, { FormSwitch, ... } from 'fe-taro-form';
 /** 
@@ -19,6 +19,17 @@ import 'fe-taro-form/dist/index.css';
 ...
 </Form>
 ...
+```
+2. 配置需要额外的经由 Taro 预设的 postcss 编译的模块。
+```js
+module.exports = {
+  // ...
+  h5: {
+    // ...
+    // 经过这一配置之后，代码中引入的处于 `node_modules/fe-taro-form/` 路径下的样式文件均会经过 postcss 的编译处理。
+    esnextModules: ['fe-taro-form']
+  }
+}
 ```
 ## class 组件及 function 组件各自获取ref的方式
 ### 1. class 组件

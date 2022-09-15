@@ -68,6 +68,7 @@ const config = {
         }
       }
     },
+    /** https://taro-docs.jd.com/taro/docs/config-detail#h5esnextmodules */
     esnextModules: ['taro-ui', 'fe-taro-form']
   },
   rn: {
