@@ -5,10 +5,6 @@
 1. 直接在项目中按如下方式引入
 ```jsx
 import Form, { FormSwitch, ... } from 'fe-taro-form';
-/** 
- * css可以在当前组件中引入并使用，也可放在项目入口文件中引入使用
- * css文件的大小在2kb以下，引入方式并不会产生实质的区别
- *  */
 import 'fe-taro-form/dist/index.css';
 ...
 <Form ref={formRef} initialValues={{switch: true}}>
