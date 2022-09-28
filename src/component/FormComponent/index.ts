@@ -26,6 +26,7 @@ import FormRate from './FormRate';
 import FormSwitch from './FormSwitch';
 import FormImagePicker from './FormImagePicker';
 import FormCheckbox from './FormCheckbox';
+import FormTextarea from './FormTextarea';
 
 export {
   FormInput,
@@ -33,5 +34,6 @@ export {
   FormRate,
   FormSwitch,
   FormImagePicker,
-  FormCheckbox
+  FormCheckbox,
+  FormTextarea
 };
