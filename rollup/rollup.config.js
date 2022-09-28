@@ -1,7 +1,7 @@
 import typescript from 'rollup-plugin-typescript2'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import { terser } from "rollup-plugin-terser";
+// import { terser } from "rollup-plugin-terser";
 import postcss from 'rollup-plugin-postcss';
 import less from 'less'
 
@@ -41,9 +41,9 @@ const config = {
       minimize: true,
       process: processLess,
     }),
-    terser(),
+    // terser(),
   ],
-  external: ['react','react-dom', 'react-is', 'prop-types', 'classnames', '@tarojs/taro', '@tarojs/components', 'taro-ui','lodash', 'object-assign',]
+  external: ['react','react-dom', 'react-is', 'prop-types', 'classnames', '@tarojs/taro', '@tarojs/components', 'taro-ui','lodash']
 }
 
 export default config
