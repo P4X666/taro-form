@@ -25,6 +25,7 @@ export interface FormPickerMultiSelectorProps
     value: string;
     label: string;
   };
+  placeholder?: string
 }
 
 export interface FormPickerTimeProps extends Omit<PickerTimeProps, 'value' | 'onChange'> {
@@ -34,6 +35,7 @@ export interface FormPickerTimeProps extends Omit<PickerTimeProps, 'value' | 'on
    * @supported weapp, h5, rn
    */
   onChange?: CommonEventFunction<PickerTimeProps.ChangeEventDetail>
+  placeholder?: string
 }
 
 export interface FormPickerDateProps extends Omit<PickerDateProps, 'value' | 'onChange'> {
@@ -43,6 +45,7 @@ export interface FormPickerDateProps extends Omit<PickerDateProps, 'value' | 'on
    * @supported weapp, h5, rn
    */
   onChange?: CommonEventFunction<PickerDateProps.ChangeEventDetail>
+  placeholder?: string
 }
 
 export interface FormPickerRegionProps extends Omit<PickerRegionProps, 'value' | 'onChange'> {
@@ -52,6 +55,7 @@ export interface FormPickerRegionProps extends Omit<PickerRegionProps, 'value' |
    * @supported weapp, h5, rn
    */
   onChange?: CommonEventFunction<PickerRegionProps.ChangeEventDetail>
+  placeholder?: string
 }
 
 export interface FormPickerSelectorProps
@@ -67,4 +71,5 @@ export interface FormPickerSelectorProps
     value: string;
     label: string;
   };
+  placeholder?: string
 }
