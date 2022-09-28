@@ -13,12 +13,10 @@
       margin-right: 8px;
       color: @error;
       font-size: 28px;
-      content: "*";
+      content: '*';
     }
   }
-  .form-component-content-space {
-    padding-top: 20px;
-  }
+
   // 覆盖 taro-ui 的样式
   .at-input {
     &::after {
@@ -49,8 +47,11 @@
       &::after {
         border: none;
       }
-      .item-extra__icon-arrow{
+      .item-extra__icon-arrow {
         font-size: 40px;
+      }
+      .item-content__info-title {
+        color: #ccc;
       }
     }
   }
@@ -59,18 +60,23 @@
   }
 }
 .form-component-wrapper--border {
-  border-bottom: 1Px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 .form-label {
   display: flex;
   align-items: center;
-  line-height: @baseHeight;
-  .label-text{
+  .label-text {
     margin-right: 8px;
   }
-  .at-icon-alert-circle{
+  .at-icon-alert-circle {
     padding-top: 6px;
   }
+}
+.form-label-line-height {
+  line-height: @baseHeight;
+}
+.form-label-line-height--new_line {
+  font-size: 34px;
 }
 .form-label--error {
   color: @error;

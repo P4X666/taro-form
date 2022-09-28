@@ -5,7 +5,8 @@ import {
   FormRate,
   FormSwitch,
   FormImagePicker,
-  FormCheckbox
+  FormCheckbox,
+  FormTextarea
 } from './src/component/FormComponent'
 import Form from "./src/component/Form/index";
 import { FormInstance } from "./src/component/Form/Form";
@@ -18,6 +19,7 @@ export {
   FormSwitch,
   FormImagePicker,
   FormCheckbox,
+  FormTextarea,
   FormInstance
 };
 
