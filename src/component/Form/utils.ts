@@ -12,10 +12,6 @@ export const getFormItemFirstChildren = (children: ReactNode) => {
   if (childList.length > 1) {
     console.warn('只支持一个子组件，其余会被忽略');
   }
-  // 不是 Form 的子组件
-  // if (!childList[0].type?.type === 'FormItem') {
-  //   console.error('子组件必须是 FormItem');
-  // }
   return childList[0];
 };
 

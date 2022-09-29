@@ -125,10 +125,6 @@ function useFormStore(initialValues?: Record<string, any>) {
   };
   /** 校验指定子组件域 */
   const validateField = (name: string) => {
-    // if (!name) {
-    //   console.error('请输入要校验的 name');
-    //   return;
-    // }
     const { value, rules } = fields[name];
     const afterRules = transfromRules(rules);
     const descriptor = {

@@ -58,7 +58,6 @@ const FormPicker: FormC<
   /** hyphens 连接符 默认是空字符串 */
   const showValue = () => {
     if (Array.isArray(value)) {
-      // multiSelector
       let result = "";
       let i = 0;
       while (i < value.length) {
