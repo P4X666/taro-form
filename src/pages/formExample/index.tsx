@@ -11,7 +11,6 @@ import Form, {
 } from "fe-taro-form";
 import Taro from "@tarojs/taro";
 import { gradeList, multiSelectorObj } from "src/utils/constent";
-import "fe-taro-form/dist/index.css";
 import styles from "./index.module.less";
 
 const FormExample = () => {

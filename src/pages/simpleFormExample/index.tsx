@@ -1,9 +1,7 @@
 import React, { MutableRefObject, useRef } from 'react';
 import { View, Button } from '@tarojs/components';
-import Form from 'src/component/Form';
 import { AtDivider } from 'taro-ui';
-import { FormCheckbox, FormInput } from 'src/component/FormComponent';
-import { FormInstance } from 'src/component/Form/types/Form';
+import Form, { FormCheckbox, FormInput, FormInstance } from 'fe-taro-form';
 import styles from './index.module.less';
 
 const SimpleFormExample = () => {
@@ -49,9 +47,13 @@ const SimpleFormExample = () => {
   ];
 
   const checkboxOption = [ {
-    value: 'list1',
+    value: true,
     label: '',
-  } ];
+  }];
+
+  const onFieldsChange = (changedValues: Record<string, any>) => {
+    console.log(changedValues);
+  }  
 
   return (
     <View className={styles.wrapper}>
@@ -69,9 +71,11 @@ const SimpleFormExample = () => {
         </Form>
         <Button form-type="submit" onClick={onSubmit} className={styles.submit}>登录</Button>
         <AtDivider content="分割线" />
-        <Form ref={custFormRef} initialValues={{ username: '用户名2' }}>
+        <Form ref={custFormRef} initialValues={{ username: '用户名2' }} onFieldsChange={onFieldsChange}>
           {
-            ({isValid, isSubmitting, errors}) => {
+            ({ isValid, isSubmitting, errors }) => {
+              const agreementValue = custFormRef.current?.getFieldValue('agreement');
+              console.log(agreementValue, 'agreementValue');
               return (
                 <>
                   <View className={styles.formItem}>
@@ -88,12 +92,18 @@ const SimpleFormExample = () => {
                     <Form.Item
                       className={styles.agreementWrap}
                       name="agreement"
-                      rules={[ { type: 'array', len: 1, message: '请同意协议' } ]}
+                      rules={[{ type: 'array', len: 1, message: '请同意协议' }]}
+                      border={false}
                     >
                       <FormCheckbox options={checkboxOption} />
                     </Form.Item>
                     <View className={styles.agreementText}>注册即代表你同意<View className={styles.agreement}>用户协议</View></View>
                   </View>
+                  {<View className={styles.formItem}>
+                    <Form.Item isNewLine label="验证码" name="code" rules={[ { type: 'string', required: true, len: 6, message: '验证码长度有误' } ]}>
+                      <FormInput />
+                    </Form.Item>
+                  </View>}
                   <Button loading={isSubmitting} onClick={onCustSubmit} className={styles.submit}>
                     登录
                   </Button>
