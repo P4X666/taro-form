@@ -73,9 +73,7 @@ const SimpleFormExample = () => {
         <AtDivider content="分割线" />
         <Form ref={custFormRef} initialValues={{ username: '用户名2' }} onFieldsChange={onFieldsChange}>
           {
-            ({ isValid, isSubmitting, errors }) => {
-              const agreementValue = custFormRef.current?.getFieldValue('agreement');
-              console.log(agreementValue, 'agreementValue');
+            ({ isValid, isSubmitting, errors }, fields) => {
               return (
                 <>
                   <View className={styles.formItem}>
@@ -99,7 +97,7 @@ const SimpleFormExample = () => {
                     </Form.Item>
                     <View className={styles.agreementText}>注册即代表你同意<View className={styles.agreement}>用户协议</View></View>
                   </View>
-                  {<View className={styles.formItem}>
+                  {fields.agreement?.length === 1 && <View className={styles.formItem}>
                     <Form.Item isNewLine label="验证码" name="code" rules={[ { type: 'string', required: true, len: 6, message: '验证码长度有误' } ]}>
                       <FormInput />
                     </Form.Item>
