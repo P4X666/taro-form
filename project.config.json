@@ -5,7 +5,7 @@
   "appid": "testAppId",
   "setting": {
     "urlCheck": true,
-    "es6": true,
+    "es6": false,
     "enhance": false,
     "compileHotReLoad": false,
     "postcss": false,
