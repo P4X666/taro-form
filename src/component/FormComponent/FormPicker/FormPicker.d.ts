@@ -2,7 +2,7 @@ import { CommonEventFunction, PickerMultiSelectorProps, PickerTimeProps, PickerD
 
 /** 选择器通用参数 */
 export interface FormPickerSimpleProps {
-  value?: string | undefined,
+  value?: string | undefined | number,
   onClick: CommonEventFunction<any>
 }
 
@@ -12,12 +12,12 @@ export interface FormPickerSimpleProps {
  *  */
 export interface FormPickerMultiSelectorProps
   extends Omit<PickerMultiSelectorProps, "value" | "onChange"> {
-  value?: string;
+  value?: string | number;
   /**
    * 当 value 改变时触发 change 事件，event.detail = {value}
    * @supported weapp, h5, rn
    */
-  onChange?: CommonEventFunction<PickerMultiSelectorProps.ChangeEventDetail>;
+  onChange?: (_data: any) => void;
   /** 连字符 */
   hyphens?: string;
   /** 自定义节点 label、value 的字段 用法仿照 select */
@@ -58,9 +58,10 @@ export interface FormPickerRegionProps extends Omit<PickerRegionProps, 'value' |
   placeholder?: string
 }
 
+/** 普通选择器：mode = selector */
 export interface FormPickerSelectorProps
   extends Omit<PickerSelectorProps, "value" | "onChange"> {
-  value?: string;
+  value?: string  | number;
   /**
    * 当 value 改变时触发 change 事件，event.detail = {value}
    * @supported weapp, h5, rn

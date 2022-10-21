@@ -1,13 +1,10 @@
-// @ts-nocheck
-// AtList 类型“{ children: (string | Element)[]; } ”与类型“IntrinsicAttributes & IntrinsicClassAttributes<Component<AtListProps, any, any>> & Readonly < AtListProps >”不具有相同的属性。
-import React from "react";
-import { Picker, BaseEventOrig } from "@tarojs/components";
-import { AtList, AtListItem } from "taro-ui";
+import React from 'react';
+import { Picker, BaseEventOrig, Text, View } from '@tarojs/components';
 import {
   emptyFunction,
   FormC,
   SomeRequired
-} from "src/component/Form/FormItem";
+} from 'src/component/Form/FormItem';
 import {
   FormPickerSimpleProps,
   FormPickerMultiSelectorProps,
@@ -15,36 +12,37 @@ import {
   FormPickerDateProps,
   FormPickerRegionProps,
   FormPickerSelectorProps
-} from "./FormPicker";
+} from './FormPicker';
 
 const FormPicker: FormC<
   | FormPickerMultiSelectorProps
+  | FormPickerSelectorProps
   | FormPickerTimeProps
   | FormPickerDateProps
   | FormPickerRegionProps
-  | FormPickerSelectorProps
   | FormPickerSimpleProps
 > = props => {
   const {
     mode = undefined,
     // 范围
-    range,
-    value = "",
+    range=[],
+    value = '',
     onClick = emptyFunction,
-    onChange,
+    onChange = emptyFunction,
     fieldNames,
     /** 连字符 */
-    hyphens = " ",
+    hyphens = ' ',
     placeholder,
     ...restProps
-  } = props as SomeRequired<FormPickerMultiSelectorProps, "hyphens">;
+  } = props as SomeRequired<FormPickerMultiSelectorProps, 'hyphens'>;
 
-  const _onChange = (e: BaseEventOrig): string | number | Array | Object => {
-    if (mode === "selector") {
+  const _onChange = (e: BaseEventOrig): void => {
+    // @ts-ignore
+    if (mode === 'selector') {
       const returnValue = range[e.detail.value];
       return onChange(fieldNames ? returnValue[fieldNames.value] : returnValue);
     }
-    if (mode === "multiSelector") {
+    if (mode === 'multiSelector') {
       const returnValue0 = range[0][e.detail.value[0]];
       const returnValue1 = range[1][e.detail.value[1]];
       return onChange(
@@ -56,18 +54,20 @@ const FormPicker: FormC<
     onChange(e.detail.value);
   };
   /** hyphens 连接符 默认是空字符串 */
-  const showValue = () => {
+  const showValue = (): string | number | undefined => {
     if (Array.isArray(value)) {
-      let result = "";
+      let result = '';
       let i = 0;
       while (i < value.length) {
         if (fieldNames) {
           result +=
             hyphens +
+            // @ts-ignore
             range[i].find(
-              (item: { [x: string]: any }) => item[fieldNames.value] === value[i]
+              (item) =>
+                item[fieldNames.value] === value[i]
             )?.[fieldNames.label];
-        }else{
+        } else {
           result += hyphens + value[i];
         }
         i++;
@@ -76,7 +76,9 @@ const FormPicker: FormC<
     }
     /** 修复在h5，picker无法选中0 */
     if (value || value === 0) {
-      if (mode === "selector" && fieldNames) {
+      // @ts-ignore
+      if (mode === 'selector' && fieldNames) {
+        // @ts-ignore
         return range.find(
           (item: { [x: string]: any }) => item[fieldNames.value] === value
         )?.[fieldNames.label];
@@ -89,39 +91,65 @@ const FormPicker: FormC<
   const renderValue = showValue();
 
   const getRange = () => {
-    if (mode === "selector") {
+    // @ts-ignore
+    if (mode === 'selector') {
       return fieldNames
         ? range.map((item: { [x: string]: any }) => item[fieldNames.label])
         : range;
     }
-    if (mode === "multiSelector") {
+    if (mode === 'multiSelector') {
       return fieldNames
-        ? range.map((ele: { [x: string]: any; }[]) => ele.map((item: { [x: string]: any }) => item[fieldNames.label]))
+        ? range.map(ele =>
+            ele.map((item: { [x: string]: any }) => item[fieldNames.label])
+          )
         : range;
     }
     return range;
   };
   return mode !== undefined ? (
-    <Picker
-      mode={mode}
-      range={getRange()}
-      onChange={_onChange}
-      {...restProps}
-    >
-      <AtList>
-        <AtListItem arrow="right" extraText={renderValue} title={renderValue ? '' : placeholder} />
-      </AtList>
+    // @ts-ignore
+    <Picker mode={mode} range={getRange()} onChange={_onChange} {...restProps}>
+      <View className="at-list">
+        <View className="at-list__item">
+          <View className="at-list__item-container">
+            <View className="at-list__item-content item-content">
+              <View className="item-content__info">
+                <View className="item-content__info-title">
+                  {renderValue ? '' : placeholder}
+                </View>
+              </View>
+            </View>
+            <View className="at-list__item-extra item-extra">
+              <View className="item-extra__info">{renderValue}</View>
+              <View className="item-extra__icon">
+                <Text className="at-icon item-extra__icon-arrow at-icon-chevron-right" />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
     </Picker>
   ) : (
-    <AtList>
-      <AtListItem
-        arrow="right"
-        extraText={value}
-        onClick={onClick}
-        title={value ? '' : placeholder}
-      />
-    </AtList>
+    <View className="at-list" onClick={onClick}>
+      <View className="at-list__item">
+        <View className="at-list__item-container">
+          <View className="at-list__item-content item-content">
+            <View className="item-content__info">
+              <View className="item-content__info-title">
+                {renderValue ? '' : placeholder}
+              </View>
+            </View>
+          </View>
+          <View className="at-list__item-extra item-extra">
+            <View className="item-extra__info">{value}</View>
+            <View className="item-extra__icon">
+              <Text className="at-icon item-extra__icon-arrow at-icon-chevron-right" />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
   );
 };
-FormPicker.displayName = "FormItem";
+FormPicker.displayName = 'FormItem';
 export default FormPicker;
