@@ -1,4 +1,9 @@
 # taro-form
+
+[![NPM version](https://img.shields.io/npm/v/fe-taro-form.svg)](https://www.npmjs.com/package/fe-taro-form)
+[![NPM downloads](https://img.shields.io/npm/dw/fe-taro-form)](https://www.npmjs.com/package/fe-taro-form)
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+
 仿照 ant design 的form设计的taro表单，理论上和taro保持一致的兼容性，目前已验证微信小程序和h5
 
 ## 使用方式
