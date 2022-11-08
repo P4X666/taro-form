@@ -41,7 +41,7 @@ const config = {
       minimize: true,
       process: processLess,
     }),
-    terser(),
+    // terser(),
   ],
   external: ['react','react-dom', 'react-is', 'prop-types', 'classnames', '@tarojs/taro', '@tarojs/components', 'taro-ui','lodash', 'object-assign',]
 }

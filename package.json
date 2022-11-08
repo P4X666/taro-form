@@ -52,7 +52,9 @@
     "clean": "rimraf ./dist",
     "lint": "eslint --ext ts,tsx src --max-warnings 5",
     "test": "rollup --config ./rollup/rollup.config.analyze.js",
-    "build-es": "npm run clean && rollup --config rollup/rollup.esm.config.js"
+    "build-es": "npm run clean && rollup --config rollup/rollup.esm.config.js",
+    "prepublishOnly": "npm run build-es",
+    "pub": "npm version patch && npm publish"
   },
   "browserslist": [
     "last 3 versions",
