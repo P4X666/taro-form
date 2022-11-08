@@ -3,46 +3,53 @@ import classNames from 'classnames';
 import React, { ReactNode, FC } from 'react';
 import './index.less';
 
-export interface FormComponentWrapperProps{
+export interface FormComponentWrapperProps {
   // 类名
-  className?: string,
+  className?: string;
   // 字段名
-  label?: string,
+  label?: string;
   // 是否必填
-  required?: boolean,
+  required?: boolean;
   // 是否有错误信息
-  error?: boolean,
+  error?: boolean;
   // 报错之后的点击事件
-  onErrorClick: (event: any) => void,
+  onErrorClick: (event: any) => void;
   // 子组件的下划线
-  border: boolean,
+  border: boolean;
   // 子组件是否为上下结构
-  isNewLine: boolean,
+  isNewLine: boolean;
   // 子节点
-  children: ReactNode
+  children: ReactNode;
 }
 
-const FormComponentWrapper: FC<FormComponentWrapperProps> = (props) => {
-  const { className, label, required, error, onErrorClick, border, isNewLine } = props;
-  const wrapperClass = classNames(
+const FormComponentWrapper: FC<FormComponentWrapperProps> = props => {
+  const {
     className,
-    'form-component-wrapper',
-    {
+    label,
+    required,
+    error,
+    onErrorClick,
+    border,
+    isNewLine
+  } = props;
+  const wrapperClass = classNames(className, 'form-component-wrapper', {
     'form-component-wrapper--border': border,
-    'form-component-wrapper--new_line': isNewLine,
+    'form-component-wrapper--new_line': isNewLine
   });
-  const labelClass = classNames('form-label', {
-    'form-label--error': error,
-    'form-label--require': required
-  });
-  const contentClass = classNames("form-component-content", {
-    "form-component-content-space": isNewLine
-  });
+  const labelClass = classNames(
+    'form-label',
+    {
+      'form-label--error': error,
+      'form-label--require': required
+    },
+    isNewLine ? 'form-label-line-height--new_line' : 'form-label-line-height'
+  );
+  const contentClass = 'form-component-content';
   return (
     <View className={wrapperClass}>
       {label && (
         <View className={labelClass} onClick={onErrorClick}>
-          <View className='label-text'>{label}</View>
+          <View className="label-text">{label}</View>
           {error && <View className="at-icon at-icon-alert-circle"></View>}
         </View>
       )}

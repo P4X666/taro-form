@@ -35,6 +35,7 @@ const FormPicker: FormC<
     fieldNames,
     /** 连字符 */
     hyphens = " ",
+    placeholder,
     ...restProps
   } = props as SomeRequired<FormPickerMultiSelectorProps, "hyphens">;
 
@@ -57,7 +58,6 @@ const FormPicker: FormC<
   /** hyphens 连接符 默认是空字符串 */
   const showValue = () => {
     if (Array.isArray(value)) {
-      // multiSelector
       let result = "";
       let i = 0;
       while (i < value.length) {
@@ -109,15 +109,16 @@ const FormPicker: FormC<
       {...restProps}
     >
       <AtList>
-        <AtListItem arrow="right" extraText={renderValue?.toString()} />
+        <AtListItem arrow="right" extraText={renderValue} title={renderValue ? '' : placeholder} />
       </AtList>
     </Picker>
   ) : (
     <AtList>
       <AtListItem
         arrow="right"
-        extraText={value?.toString()}
+        extraText={value}
         onClick={onClick}
+        title={value ? '' : placeholder}
       />
     </AtList>
   );

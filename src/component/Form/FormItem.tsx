@@ -23,11 +23,6 @@ export interface FormItemProps {
   // 标签文本
   label?: string;
   children: JSX.Element;
-  // { value: any, onChange: () => { } }
-  /**子节点的值的属性，如 checkbox 的是 'checked' */
-  // valuePropName?: string,
-  /**设置收集字段值变更的时机 */
-  // trigger?: string;
   /**设置如何将 event 的值转换成字段值 */
   getValueFromEvent?: (event: any) => any;
   /**校验规则，设置字段的校验逻辑。请看 async validator 了解更多规则 */
@@ -91,7 +86,7 @@ const FormItem: FC<FormItemProps> = props => {
         isValid: true
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   // 获取store 对应的 value
@@ -134,7 +129,11 @@ const FormItem: FC<FormItemProps> = props => {
   const returnChildNode = useMemo(()=>React.cloneElement(
     child,
     nodeProps as { value: any; onChange: (e: MouseEvent) => void }
-  ), [nodeProps.value]);
+  ), [
+    nodeProps.value,
+    /** fix: 异步获取 range */
+    nodeProps.range
+  ]);
 
   const onErrorClickHandle = useCallback(
     () => onErrorClick(errors?.[0]?.message || ""),

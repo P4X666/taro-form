@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import useFormStore, { FormState } from "./useFormStore";
 
-export type RenderProps = (form: FormState) => ReactNode;
+export type RenderProps = (form: FormState, fields: Record<string, any>) => ReactNode;
 
 export interface FormProps {
   initialValues?: Record<string, any>;
@@ -32,7 +32,7 @@ export const FormContext = createContext<IFormContext>({} as IFormContext);
 
 const Form = forwardRef<FormInstance, FormProps>((props, ref) => {
     const { children, initialValues, onFieldsChange, className='' } = props;
-    const { form, fields, dispatch, ...restProps } = useFormStore(
+    const { form, fields, dispatch, getFieldsValue, ...restProps } = useFormStore(
       initialValues
     );
     const { validateField } = restProps;
@@ -41,6 +41,7 @@ const Form = forwardRef<FormInstance, FormProps>((props, ref) => {
       ref,
       (): FormInstance => {
         return {
+          getFieldsValue,
           ...restProps
         };
       }
@@ -57,7 +58,8 @@ const Form = forwardRef<FormInstance, FormProps>((props, ref) => {
     // 支持自定义渲染
     let childrenNode: ReactNode;
     if (typeof children === "function") {
-      childrenNode = children(form);
+      const values = getFieldsValue();
+      childrenNode = children(form, values);
     } else {
       childrenNode = children;
     }

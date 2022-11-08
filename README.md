@@ -1,4 +1,9 @@
 # taro-form
+
+[![NPM version](https://img.shields.io/npm/v/fe-taro-form.svg)](https://www.npmjs.com/package/fe-taro-form)
+[![NPM downloads](https://img.shields.io/npm/dw/fe-taro-form)](https://www.npmjs.com/package/fe-taro-form)
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+
 仿照 ant design 的form设计的taro表单，理论上和taro保持一致的兼容性，目前已验证微信小程序和h5
 
 ## 使用方式
@@ -55,24 +60,24 @@ const formRef = useRef();
 
 ### Form
 
-| 参数 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| ref | form 控制实例 | [FormInstance](#FormInstance) | - |  |
-| initialValues | 表单默认值，只有初始化以及重置时生效 | object | - |  |
-| onFieldsChange | 字段更新时触发回调事件 | function(changedFields) | - |  |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| ref | form 控制实例 | [FormInstance](#FormInstance) | - |
+| initialValues | 表单默认值，只有初始化以及重置时生效 | object | - |
+| onFieldsChange | 字段更新时触发回调事件 | function(changedFields) | - |
 
 ## Form.Item
 
 表单字段组件，用于数据双向绑定、校验、布局等。
 
-| 参数 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| name | 字段名 | string | - |  |
-| label | `label` 标签的文本 | ReactNode | - |  |
-| getValueFromEvent | 设置如何将 event 的值转换成字段值 | (..args: any\[]) => any | - |  |
-| required | 必填样式设置。如不设置，则会根据校验规则自动生成 | boolean | false |  |
-| rules | 校验规则，设置字段的校验逻辑。 | [Rule](#Rule)\[] | - |  |
-| validateTrigger | 设置字段校验的时机 | `onBlur` | `onChange` | `onChange` |  |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| name | 字段名 | string | - |
+| label | `label` 标签的文本 | ReactNode | - |
+| getValueFromEvent | 设置如何将 event 的值转换成字段值 | (..args: any\[]) => any | - |
+| required | 必填样式设置。如不设置，则会根据校验规则自动生成 | boolean | false |
+| rules | 校验规则，设置字段的校验逻辑。 | [Rule](#Rule)\[] | - |
+| validateTrigger | 设置字段校验的时机 | `onBlur`,`onChange` | `onBlur` |
 
 被设置了 `name` 属性的 `Form.Item` 包装的控件，表单控件会自动添加 `value` , `onChange`（或 `validateTrigger` 指定的其他属性），数据同步将被 Form 接管，这会导致以下结果：
 
@@ -82,34 +87,36 @@ const formRef = useRef();
 
 ### FormInstance
 
-| 名称 | 说明 | 类型 | 版本 |
-| --- | --- | --- | --- |
-| getFieldValue | 获取对应字段名的值 | (name: string) => any |  |
-| getFieldsValue | 获取所有字段名的值 | () => any |  |
+| 名称 | 说明 | 类型 |
+| --- | --- | --- |
+| getFieldValue | 获取对应字段名的值 | (name: string) => any |
+| getFieldsValue | 获取所有字段名的值 | () => any |
 | setFieldValue | 设置对应字段名的值 | (name: string, value: any) => void | |
-| setFieldsValue | 设置表单的值。如果你只想修改 Form.List 中单项值，请通过 `setFieldValue` 进行指定 | (values) => void |  |
-| validateField | 校验指定子组件域 | () => Promise |  |
-| validateAllFields | 校验表单所有子项 | () => Promise |  |
-| resetFields | 重置一组字段到 `initialValues` | () => void |  |
+| setFieldsValue | 设置表单的值。如果你只想修改 Form.List 中单项值，请通过 `setFieldValue` 进行指定 | (values) => void |
+| validateField | 校验指定子组件域 | () => Promise |
+| validateAllFields | 校验表单所有子项 | () => Promise |
+| resetFields | 重置一组字段到 `initialValues` | () => void |
 
 #### Rule
 
 Rule 支持接收 object 进行配置，也支持 function 来动态获取 form 的数据：  
 更多请参考[此处](https://github.com/yiminghe/async-validator#type)
 
-| 名称 | 说明 | 类型 | 版本 |
-| --- | --- | --- | --- |
-| defaultField | 仅在 `type` 为 `array` 类型时有效，用于指定数组元素的校验规则 | [rule](#Rule) |  |
-| enum | 是否匹配枚举中的值（需要将 `type` 设置为 `enum`） | any\[] |  |
-| fields | 仅在 `type` 为 `array` 或 `object` 类型时有效，用于指定子元素的校验规则 | Record&lt;string, [rule](#Rule)> |  |
-| len | string 类型时为字符串长度；number 类型时为确定数字； array 类型时为数组长度 | number |  |
-| max | 必须设置 `type`：string 类型为字符串最大长度；number 类型时为最大值；array 类型时为数组最大长度 | number |  |
-| message | 错误信息，不设置时会通过[模板](#validateMessages)自动生成 | string |  |
-| min | 必须设置 `type`：string 类型为字符串最小长度；number 类型时为最小值；array 类型时为数组最小长度 | number |  |
-| pattern | 正则表达式匹配 | RegExp |  |
-| required | 是否为必选字段 | boolean |  |
-| transform | 将字段值转换成目标值后进行校验 | (value) => any |  |
-| type | 类型，常见有 `string` \|`number` \|`boolean` \|`url` \| `email`。 | string |  |
-| validateTrigger | 设置触发验证时机，必须是 Form.Item 的 `validateTrigger` 的子集 | string \| string\[] |  |
-| validator | 自定义校验，接收 Promise 作为返回值。[示例](#components-form-demo-register)参考 | ([rule](#Rule), value) => Promise |  |
-| whitespace | 如果字段仅包含空格则校验不通过，只在 `type: 'string'` 时生效 | boolean |  |
+| 名称 | 说明 | 类型 |
+| --- | --- | --- |
+| defaultField | 仅在 `type` 为 `array` 类型时有效，用于指定数组元素的校验规则 | [rule](#Rule) |
+| enum | 是否匹配枚举中的值（需要将 `type` 设置为 `enum`） | any\[] |
+| fields | 仅在 `type` 为 `array` 或 `object` 类型时有效，用于指定子元素的校验规则 | Record&lt;string, [rule](#Rule)> |
+| len | string 类型时为字符串长度；number 类型时为确定数字； array 类型时为数组长度 | number |
+| max | 必须设置 `type`：string 类型为字符串最大长度；number 类型时为最大值；array 类型时为数组最大长度 | number |
+| message | 错误信息，不设置时会通过[模板](#validateMessages)自动生成 | string |
+| min | 必须设置 `type`：string 类型为字符串最小长度；number 类型时为最小值；array 类型时为数组最小长度 | number |
+| pattern | 正则表达式匹配 | RegExp |
+| required | 是否为必选字段 | boolean |
+| transform | 将字段值转换成目标值后进行校验 | (value) => any |
+| type | 类型，常见有 `string` \|`number` \|`boolean` \|`url` \| `email`。 | string |
+| validateTrigger | 设置触发验证时机，必须是 Form.Item 的 `validateTrigger` 的子集 | string \| string\[] |
+| validator | 自定义校验，接收 Promise 作为返回值。[示例](#components-form-demo-register)参考 | ([rule](#Rule), value) => Promise |
+| whitespace | 如果字段仅包含空格则校验不通过，只在 `type: 'string'` 时生效 | boolean |
+
+### 使用示例详见 src/pages 目录下

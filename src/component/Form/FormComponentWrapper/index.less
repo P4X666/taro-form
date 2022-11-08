@@ -6,19 +6,17 @@
   align-items: center;
   width: 100%;
   min-height: @baseHeight;
-  padding: 20px 0;
+  padding: 12px 0;
   background-color: #fff;
   .form-label--require {
     &::before {
       margin-right: 8px;
       color: @error;
       font-size: 28px;
-      content: "*";
+      content: '*';
     }
   }
-  .form-component-content-space {
-    padding-top: 20px;
-  }
+
   // 覆盖 taro-ui 的样式
   .at-input {
     &::after {
@@ -41,7 +39,6 @@
     text-align: right;
   }
   .at-list {
-    // height: 100%;
     &::after {
       border: none;
     }
@@ -49,6 +46,20 @@
       &::after {
         border: none;
       }
+      .item-extra__icon-arrow {
+        font-size: 40px;
+      }
+      .item-content__info-title {
+        color: #ccc;
+      }
+    }
+  }
+  .at-checkbox {
+    &::before {
+      border: none;
+    }
+    &::after {
+      border: none;
     }
   }
   .form-component-content {
@@ -56,18 +67,23 @@
   }
 }
 .form-component-wrapper--border {
-  border-bottom: 1Px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 .form-label {
   display: flex;
   align-items: center;
+  .label-text {
+    margin-right: 4px;
+  }
+  .at-icon-alert-circle {
+    padding-top: 4px;
+  }
+}
+.form-label-line-height {
   line-height: @baseHeight;
-  .label-text{
-    margin-right: 8px;
-  }
-  .at-icon-alert-circle{
-    padding-top: 6px;
-  }
+}
+.form-label-line-height--new_line {
+  font-size: 34px;
 }
 .form-label--error {
   color: @error;

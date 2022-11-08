@@ -1,5 +1,6 @@
 import { Component, ReactNode } from 'react'
 import 'taro-ui/dist/style/index.scss';
+import "fe-taro-form/dist/index.css";
 import './app.less'
 
 class App extends Component<{ children:ReactNode }> {
